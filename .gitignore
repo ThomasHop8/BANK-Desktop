@@ -27,3 +27,5 @@ hs_err_pid*
 BANK-Desktop/.idea
 BANK-Desktop/BANK-Desktop.iml
 BANK-Desktop/nbproject/
+.classpath
+.project
