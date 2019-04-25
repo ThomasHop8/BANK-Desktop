@@ -21,3 +21,6 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+/BANK-Desktop/nbproject/private/
+/BANK-Desktop/build/
+/BANK-Desktop/dist/
