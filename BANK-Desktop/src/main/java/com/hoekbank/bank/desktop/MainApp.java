@@ -1,5 +1,6 @@
 package com.hoekbank.bank.desktop;
 
+import com.hoekbank.bank.desktop.helpers.JerseyClientPost;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.fxml.FXMLLoader;
@@ -20,6 +21,8 @@ public class MainApp extends Application {
         stage.setTitle("JavaFX and Mavenhghjgjg");
         stage.setScene(scene);
         stage.show();
+
+        JerseyClientPost post = new JerseyClientPost();
     }
 
     /**
