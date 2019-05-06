@@ -1,28 +1,34 @@
 package com.hoekbank.bank.desktop;
 
-import com.hoekbank.bank.desktop.helpers.JerseyClientPost;
+import com.hoekbank.bank.desktop.helpers.ScenesController;
+import com.hoekbank.bank.desktop.screens.SplashScreen;
 import javafx.application.Application;
-import static javafx.application.Application.launch;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-
 
 public class MainApp extends Application {
 
-    @Override
-    public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/Scene.fxml"));
-        
-        Scene scene = new Scene(root);
-        scene.getStylesheets().add("/styles/Styles.css");
-        
-        stage.setTitle("JavaFX and Mavenhghjgjg");
-        stage.setScene(scene);
-        stage.show();
+    public static double appVersionCode = 1.3;
+    public static Integer screenWidth = 1280;
+    public static Integer screenHeight = 720;
 
-        JerseyClientPost post = new JerseyClientPost();
+    @Override
+    public void start(Stage primaryStage) {
+        Pane splashPane = new Pane();
+        new SplashScreen(splashPane);
+
+        Scene splashScene = new Scene(splashPane, screenWidth, screenHeight);
+
+        ScenesController screenController = new ScenesController(primaryStage);
+        screenController.addScene("start", splashScene);
+
+        primaryStage.setTitle("Hoekbank Desktop");
+        primaryStage.setScene(splashScene);
+        primaryStage.setWidth(screenWidth);
+        primaryStage.setHeight(screenHeight);
+        primaryStage.setResizable(false);
+        primaryStage.show();
     }
 
     /**
