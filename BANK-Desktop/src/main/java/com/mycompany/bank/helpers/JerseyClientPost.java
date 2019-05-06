@@ -1,4 +1,4 @@
-package helpers;
+package com.mycompany.bank.helpers;
 
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
