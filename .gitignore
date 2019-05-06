@@ -30,3 +30,4 @@ BANK-Desktop/nbproject/
 .classpath
 .project
 .DS_Store
+/BANK-Desktop/target/
