@@ -1,5 +1,6 @@
-package com.mycompany.bank.desktop;
+package com.hoekbbank.bank.desktop;
 
+import com.hoekbbank.bank.desktop.helpers.JerseyClientPost;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.fxml.FXMLLoader;

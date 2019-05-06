@@ -1,4 +1,4 @@
-package com.mycompany.bank.desktop;
+package com.hoekbbank.bank.desktop.helpers;
 
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;

@@ -1,4 +1,4 @@
-package com.mycompany.bank.desktop;
+package com.hoekbbank.bank.desktop;
 
 import java.net.URL;
 import java.util.ResourceBundle;
