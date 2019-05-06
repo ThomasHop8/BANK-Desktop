@@ -19,7 +19,9 @@ public class SplashScreen extends SplashScreenUI {
 
         fade.playFromStart();
         fade.setOnFinished(event -> {
-            // TODO: Login Screen
+            Pane loginPane = new Pane();
+            new LoginScreen(loginPane);
+            ScenesController.setStage(loginPane);
         });
 
         root.setStyle("-fx-background-color: #000");
