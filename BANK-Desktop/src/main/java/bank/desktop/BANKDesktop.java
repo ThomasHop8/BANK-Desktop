@@ -5,9 +5,8 @@
  */
 package bank.desktop;
 
+import bank.desktop.helpers.JerseyClientPost;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
@@ -18,7 +17,7 @@ import javafx.stage.Stage;
  * @author kevin
  */
 public class BANKDesktop extends Application {
-    
+
     @Override
     public void start(Stage primaryStage) {
         Button btn = new Button();
@@ -33,6 +32,8 @@ public class BANKDesktop extends Application {
         primaryStage.setTitle("Hello World!");
         primaryStage.setScene(scene);
         primaryStage.show();
+
+        JerseyClientPost post = new JerseyClientPost();
     }
 
     /**
@@ -41,5 +42,5 @@ public class BANKDesktop extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-    
+
 }
