@@ -6,6 +6,6 @@ import javafx.scene.layout.Pane;
 public class RegisterScreen extends RegisterScreenUI {
 
     public RegisterScreen(Pane root) {
-        root.getChildren().addAll(registerButton);
+        root.getChildren().addAll(registerButton, txtnaam);
     }
 }
