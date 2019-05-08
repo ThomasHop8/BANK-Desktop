@@ -4,10 +4,15 @@ import com.hoekbank.bank.desktop.ui.ValidateScreenUI;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+
+import java.sql.SQLOutput;
+import java.util.Optional;
 
 
 /**
@@ -23,7 +28,7 @@ public class ValidateScreen extends ValidateScreenUI {
          */
         GridPane gridPaneLinks = new GridPane();
         // gridpane settings
-        gridPaneLinks.setMinSize(640,691);
+        gridPaneLinks.setMinSize(640, 691);
 //        gridPaneLinks.setMaxSize(640,700);
         gridPaneLinks.setAlignment(Pos.CENTER);
         gridPaneLinks.setVgap(10);
@@ -35,25 +40,25 @@ public class ValidateScreen extends ValidateScreenUI {
 //        gridPaneLinks.setStyle(opmaak);
 
         // Fonts, Colors
-        lbTitle.setFont(Font.font("Arial", FontWeight.BOLD,20));
+        lbTitle.setFont(Font.font("Arial", FontWeight.BOLD, 20));
         lbTitle.setTextFill(Color.BLACK);
 
         /**
          * Add UI on GridPane links
          */
-        gridPaneLinks.add(lbTitle,0,0);
-        gridPaneLinks.add(lbBsn,0,1);
-        gridPaneLinks.add(txtBsn,0,2);
-        gridPaneLinks.add(lbBkrGoedkeuren,0,3);
-        gridPaneLinks.add(checkBkrJa,0,4);
-        gridPaneLinks.add(checkBkrNee,0,4);
+        gridPaneLinks.add(lbTitle, 0, 0);
+        gridPaneLinks.add(lbBsn, 0, 1);
+        gridPaneLinks.add(txtBsn, 0, 2);
+        gridPaneLinks.add(lbBkrGoedkeuren, 0, 3);
+        gridPaneLinks.add(checkBkrJa, 0, 4);
+        gridPaneLinks.add(checkBkrNee, 0, 4);
         gridPaneLinks.setHalignment(checkBkrNee, HPos.CENTER);
-        gridPaneLinks.add(lbZwarteLijst,0,5);
-        gridPaneLinks.add(checkZwrtLstJa,0,6);
-        gridPaneLinks.add(checkZwrtLstNee,0,6);
+        gridPaneLinks.add(lbZwarteLijst, 0, 5);
+        gridPaneLinks.add(checkZwrtLstJa, 0, 6);
+        gridPaneLinks.add(checkZwrtLstNee, 0, 6);
         gridPaneLinks.setHalignment(checkZwrtLstNee, HPos.CENTER);
-        gridPaneLinks.add(lbRedenAfwijzing,0,7);
-        gridPaneLinks.add(txtRedenAfwijzing,0,8);
+        gridPaneLinks.add(lbRedenAfwijzing, 0, 7);
+        gridPaneLinks.add(txtRedenAfwijzing, 0, 8);
 
         // Notitie afwijzing settings
         lbRedenAfwijzing.setVisible(false);
@@ -71,8 +76,8 @@ public class ValidateScreen extends ValidateScreenUI {
         GridPane gridRechts = new GridPane();
 
         // gridpane settings
-        gridRechts.setMinSize(640,691);
-        gridRechts.setMaxSize(640,691);
+        gridRechts.setMinSize(640, 691);
+        gridRechts.setMaxSize(640, 691);
         gridRechts.setAlignment(Pos.BOTTOM_RIGHT);
         gridRechts.setVgap(10);
         gridRechts.setHgap(10);
@@ -81,16 +86,17 @@ public class ValidateScreen extends ValidateScreenUI {
         // Background color for testing gridpanes
 //        String opmaak2 = "-fx-background-color: rgb(31,153,14);";
 //        gridRechts.setStyle(opmaak2);
-        gridRechts.add(btnRegistreren,1,0);
-        gridRechts.add(btnAfwijzen,0,0);
+        gridRechts.add(btnRegistreren, 2, 0);
+        gridRechts.add(btnAfwijzen, 1, 0);
+        gridRechts.add(btnTerug, 0, 0);
 
         /**
          * GridPane root, main gridpane.
          * add gridPaneLinks/gridRechts to root.
          */
 
-        root.add(gridPaneLinks,0,0);
-        root.add(gridRechts,1,0);
+        root.add(gridPaneLinks, 0, 0);
+        root.add(gridRechts, 1, 0);
 
         /**
          * Events
@@ -104,7 +110,7 @@ public class ValidateScreen extends ValidateScreenUI {
                 lbRedenAfwijzing.setVisible(true);
                 btnAfwijzen.setVisible(true);
                 btnRegistreren.setVisible(false);
-                System.out.println("check");
+                //System.out.println("check");
             }
 
         });
@@ -115,7 +121,7 @@ public class ValidateScreen extends ValidateScreenUI {
                 checkBkrJa.setSelected(false);
                 txtRedenAfwijzing.setVisible(false);
                 lbRedenAfwijzing.setVisible(false);
-                System.out.println("check");
+                //System.out.println("check");
             }
             if (checkBkrJa.isSelected() && checkZwrtLstNee.isSelected()) {
                 txtRedenAfwijzing.setVisible(true);
@@ -130,7 +136,7 @@ public class ValidateScreen extends ValidateScreenUI {
         });
 
 
-        checkZwrtLstJa.setOnAction( event ->  {
+        checkZwrtLstJa.setOnAction(event -> {
             if (checkZwrtLstJa.isSelected()) {
                 checkZwrtLstNee.setSelected(false);
                 // zet zichtbaar
@@ -138,7 +144,7 @@ public class ValidateScreen extends ValidateScreenUI {
                 lbRedenAfwijzing.setVisible(true);
                 btnAfwijzen.setVisible(true);
                 btnRegistreren.setVisible(false);
-                System.out.println("check2");
+                //System.out.println("check2");
             }
             if (!checkZwrtLstJa.isSelected() && checkBkrJa.isSelected()) {
                 btnAfwijzen.setVisible(true);
@@ -146,13 +152,13 @@ public class ValidateScreen extends ValidateScreenUI {
 
         });
 
-        checkZwrtLstNee.setOnAction( event ->  {
+        checkZwrtLstNee.setOnAction(event -> {
             if (checkZwrtLstNee.isSelected()) {
                 checkZwrtLstJa.setSelected(false);
                 txtRedenAfwijzing.setVisible(false);
                 lbRedenAfwijzing.setVisible(false);
 
-                System.out.println("check2");
+                //System.out.println("check2");
             }
 
             if (checkZwrtLstNee.isSelected() && checkBkrJa.isSelected()) {
@@ -167,10 +173,81 @@ public class ValidateScreen extends ValidateScreenUI {
 
         });
 
+        btnTerug.setOnAction(event -> {
+            // todo Hier terug naar dashboard?
+            System.out.println("Knop terug clicked!");
+        });
+
+        btnAfwijzen.setOnAction(event -> {
+//            System.out.println("btnAfwijzen clicked");
+            try {
+                if (txtBsn.getText().isEmpty()) {
+                    alertAfwijsWarning.setTitle("Oops!?");
+                    alertAfwijsWarning.setContentText("BSN veld is leeg!");
+                    alertAfwijsWarning.showAndWait();
+                    return;
+                }
+                if (!checkZwrtLstJa.isSelected() && !checkBkrJa.isSelected()) {
+                    alertAfwijsWarning.setTitle("Oops!?");
+                    alertAfwijsWarning.setContentText("Één van de checkbox 'Ja' is niet aangevinkt!");
+                    alertAfwijsWarning.showAndWait();
+                    return;
+                }
+                if (txtRedenAfwijzing.getText().isEmpty()) {
+                    alertAfwijsWarning.setTitle("Oops!?");
+                    alertAfwijsWarning.setContentText("Reden voor afwijzing is niet ingevuld!");
+                    alertAfwijsWarning.showAndWait();
+                    return;
+                }
+                // Bevestigen of annuleren
+                alertAfwijsBevestigen.setTitle("Afwijzing bevestigen");
+                alertAfwijsBevestigen.setContentText("Weet u het zeker?");
+                Optional<ButtonType> alertResultAfwijzen = alertAfwijsBevestigen.showAndWait();
+
+                if (alertResultAfwijzen.isPresent() && alertResultAfwijzen.get() == ButtonType.OK) {
+
+                    // todo sql afwijzing opslaan?
+                    System.out.println("Afwijzing succes!");
+
+                }
+
+            } catch (Exception e) {
+                e.getMessage();
+            }
+        });
+
+        btnRegistreren.setOnAction(event -> {
+            try {
+                if (txtBsn.getText().isEmpty()) {
+                    alertBtnRegisterWarning.setTitle("Oops!?");
+                    alertBtnRegisterWarning.setContentText("BSN veld is leeg!");
+                    alertBtnRegisterWarning.showAndWait();
+                    return;
+                }
+                if (!checkBkrNee.isSelected() || !checkZwrtLstNee.isSelected()) {
+                    alertBtnRegisterWarning.setTitle("Oops!?");
+                    alertBtnRegisterWarning.setContentText("Checkboxes 'Nee' niet aangevinkt!");
+                    alertBtnRegisterWarning.showAndWait();
+                    return;
+                }
+                // Bevestigen of annuleren
+                alertBtnRegisterBevestigen.setTitle("Controle bevestigen");
+                alertBtnRegisterBevestigen.setContentText("Weet u het zeker?");
+                Optional<ButtonType> alertResultRegistreren = alertBtnRegisterBevestigen.showAndWait();
+
+                if (alertResultRegistreren.isPresent() && alertResultRegistreren.get() == ButtonType.OK) {
+
+                    // todo sql hier, controlle opslaan?
+                    System.out.println("Controlle succes!, Registreer pagina >");
 
 
+                }
+            } catch (Exception e) {
+                e.getMessage();
+            }
 
 
+        });
 
 
 //        root.getChildren().addAll(gridControle);
