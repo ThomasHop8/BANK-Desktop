@@ -28,15 +28,6 @@ public abstract class RegisterScreenUI extends BaseScreen {
         lblhuisnummer = new Label ("Huisnummer");
         lblemail = new Label ("Email adres");
         lblpostcode = new Label ("Postcode");
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+      
     }
 }
