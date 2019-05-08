@@ -7,7 +7,7 @@ import javafx.scene.control.TextField;
 
 public abstract class RegisterScreenUI extends BaseScreen {
 
-    public Button registerButton;
+    public Button registerButton, terugButton;
     public TextField txtnaam,txtstraatnaam,txtwoonplaats, txttelefoon,txthuisnummer, txtemail,txtpostcode;
     public Label lblnaam,lblstraatnaam,lblwoonplaats,lbltelefoon,lblhuisnummer, lblemail,lblpostcode;
 
@@ -28,6 +28,7 @@ public abstract class RegisterScreenUI extends BaseScreen {
         lblhuisnummer = new Label ("Huisnummer");
         lblemail = new Label ("Email adres");
         lblpostcode = new Label ("Postcode");
+        terugButton = new Button ("Terug");
       
     }
 }
