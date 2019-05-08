@@ -1,11 +1,19 @@
 package com.hoekbank.bank.desktop;
 
+import com.google.gson.JsonObject;
+import com.hoekbank.bank.desktop.api.API;
+import com.hoekbank.bank.desktop.api.APIService;
+import com.hoekbank.bank.desktop.helpers.AppDataContainer;
 import com.hoekbank.bank.desktop.helpers.ScenesController;
+import com.hoekbank.bank.desktop.models.User;
 import com.hoekbank.bank.desktop.screens.SplashScreen;
+import com.sun.jersey.core.util.MultivaluedMapImpl;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+
+import javax.ws.rs.core.MultivaluedMap;
 
 public class MainApp extends Application {
 
@@ -29,6 +37,9 @@ public class MainApp extends Application {
         primaryStage.setHeight(screenHeight);
         primaryStage.setResizable(false);
         primaryStage.show();
+
+//        registerUser();
+        loginUser();
     }
 
     /**
@@ -41,6 +52,39 @@ public class MainApp extends Application {
      */
     public static void main(String[] args) {
         launch(args);
+    }
+
+
+    public void registerUser() {
+        User user = new User();
+        user.setFullname("Java Test");
+        user.setEmail("java@test.com");
+        user.setBsn("123123");
+        user.setHuisnummer("1B");
+        user.setPassword("wachtwoord");
+        user.setPostcode("1234AB");
+        user.setStraatnaam("Straatnaam");
+        user.setTelefoonnummer("06123456");
+        user.setWoonplaats("Woonplaats");
+
+        MultivaluedMap<String, String> formData = new MultivaluedMapImpl();
+        formData.add("user", user.serialize());
+
+        System.out.println(API.getInstance().post(APIService.USER_CREATE, formData));
+    }
+
+    public void loginUser() {
+        MultivaluedMap<String, String> formData = new MultivaluedMapImpl();
+        formData.add("email", "tjphopst@avans.nl");
+        formData.add("password", "test12");
+
+        JsonObject apiResponse = API.getInstance().post(APIService.USER_LOGIN, formData);
+
+        if(apiResponse.get("success") != null) {
+            AppDataContainer.getInstance().setUserToken(apiResponse.get("Token").getAsString());
+        } else {
+            System.out.println(apiResponse.get("message"));
+        }
     }
 
 }
