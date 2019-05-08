@@ -6,6 +6,7 @@ import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.GridPane;
 import javafx.util.Duration;
 
 public class SplashScreen extends SplashScreenUI {
@@ -19,7 +20,7 @@ public class SplashScreen extends SplashScreenUI {
 
         fade.playFromStart();
         fade.setOnFinished(event -> {
-            Pane registerPane = new Pane();
+            GridPane registerPane = new GridPane();
             new RegisterScreen(registerPane);
             ScenesController.setStage(registerPane);
         });
