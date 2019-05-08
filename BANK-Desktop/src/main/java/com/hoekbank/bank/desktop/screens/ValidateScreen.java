@@ -38,6 +38,9 @@ public class ValidateScreen extends ValidateScreenUI {
         lbTitle.setFont(Font.font("Arial", FontWeight.BOLD,20));
         lbTitle.setTextFill(Color.BLACK);
 
+        /**
+         * Add UI on GridPane links
+         */
         gridPaneLinks.add(lbTitle,0,0);
         gridPaneLinks.add(lbBsn,0,1);
         gridPaneLinks.add(txtBsn,0,2);
@@ -49,6 +52,18 @@ public class ValidateScreen extends ValidateScreenUI {
         gridPaneLinks.add(checkZwrtLstJa,0,6);
         gridPaneLinks.add(checkZwrtLstNee,0,6);
         gridPaneLinks.setHalignment(checkZwrtLstNee, HPos.CENTER);
+        gridPaneLinks.add(lbRedenAfwijzing,0,7);
+        gridPaneLinks.add(txtRedenAfwijzing,0,8);
+
+        // Notitie afwijzing settings
+        lbRedenAfwijzing.setVisible(false);
+        txtRedenAfwijzing.setPrefHeight(100);
+        txtRedenAfwijzing.setPrefWidth(10);
+        txtRedenAfwijzing.setVisible(false);
+
+        // Knoppen Default zichtbaarheid false
+        btnAfwijzen.setVisible(false);
+        btnRegistreren.setVisible(false);
 
         /**
          * GridPane rechts, knoppen
@@ -77,35 +92,82 @@ public class ValidateScreen extends ValidateScreenUI {
         root.add(gridPaneLinks,0,0);
         root.add(gridRechts,1,0);
 
+        /**
+         * Events
+         */
+
         checkBkrJa.setOnAction(event -> {
 
             if (checkBkrJa.isSelected()) {
                 checkBkrNee.setSelected(false);
+                txtRedenAfwijzing.setVisible(true);
+                lbRedenAfwijzing.setVisible(true);
+                btnAfwijzen.setVisible(true);
+                btnRegistreren.setVisible(false);
                 System.out.println("check");
             }
+
         });
 
         checkBkrNee.setOnAction(event -> {
 
             if (checkBkrNee.isSelected()) {
                 checkBkrJa.setSelected(false);
+                txtRedenAfwijzing.setVisible(false);
+                lbRedenAfwijzing.setVisible(false);
                 System.out.println("check");
             }
+            if (checkBkrJa.isSelected() && checkZwrtLstNee.isSelected()) {
+                txtRedenAfwijzing.setVisible(true);
+                lbRedenAfwijzing.setVisible(true);
+            }
+
+            if (checkZwrtLstNee.isSelected() && checkBkrNee.isSelected()) {
+                btnRegistreren.setVisible(true);
+                btnAfwijzen.setVisible(false);
+            }
+
         });
+
 
         checkZwrtLstJa.setOnAction( event ->  {
             if (checkZwrtLstJa.isSelected()) {
                 checkZwrtLstNee.setSelected(false);
+                // zet zichtbaar
+                txtRedenAfwijzing.setVisible(true);
+                lbRedenAfwijzing.setVisible(true);
+                btnAfwijzen.setVisible(true);
+                btnRegistreren.setVisible(false);
                 System.out.println("check2");
             }
+            if (!checkZwrtLstJa.isSelected() && checkBkrJa.isSelected()) {
+                btnAfwijzen.setVisible(true);
+            }
+
         });
 
         checkZwrtLstNee.setOnAction( event ->  {
             if (checkZwrtLstNee.isSelected()) {
                 checkZwrtLstJa.setSelected(false);
+                txtRedenAfwijzing.setVisible(false);
+                lbRedenAfwijzing.setVisible(false);
+
                 System.out.println("check2");
             }
+
+            if (checkZwrtLstNee.isSelected() && checkBkrJa.isSelected()) {
+                txtRedenAfwijzing.setVisible(true);
+                lbRedenAfwijzing.setVisible(true);
+            }
+            if (checkZwrtLstNee.isSelected() && checkBkrNee.isSelected()) {
+                btnRegistreren.setVisible(true);
+                btnAfwijzen.setVisible(false);
+            }
+
+
         });
+
+
 
 
 

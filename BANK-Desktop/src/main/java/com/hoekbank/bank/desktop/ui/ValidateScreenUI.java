@@ -1,15 +1,13 @@
 package com.hoekbank.bank.desktop.ui;
 
 import com.hoekbank.bank.desktop.BaseScreen;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 public abstract class ValidateScreenUI extends BaseScreen {
 
     public Button btnRegistreren, btnAfwijzen;
-    public TextField txtBsn, txtRedenAfwijzing;
+    public TextField txtBsn;
+    public TextArea txtRedenAfwijzing;
     public Label lbTitle,lbBsn, lbBkrGoedkeuren, lbZwarteLijst, lbRedenAfwijzing;
     public CheckBox checkBkrJa, checkBkrNee, checkZwrtLstJa, checkZwrtLstNee;
 
@@ -26,12 +24,12 @@ public abstract class ValidateScreenUI extends BaseScreen {
         // TextFields
         txtBsn = new TextField();
         txtBsn.setPromptText("123456789");
-        txtRedenAfwijzing = new TextField();
+        txtRedenAfwijzing = new TextArea();
         txtRedenAfwijzing.setPromptText("Reden?");
         // Labels
         lbTitle = new Label("Gebruiker Controleren");
         lbBsn = new Label("BSN / KvK");
-        lbBkrGoedkeuren = new Label ("BKR goed gekeurd?");
+        lbBkrGoedkeuren = new Label ("BKR Afgekeurd?");
         lbZwarteLijst = new Label("Aanwezig in zwarte lijst?");
         lbRedenAfwijzing = new Label("Reden van afwijzing?");
         // CheckBoxes
