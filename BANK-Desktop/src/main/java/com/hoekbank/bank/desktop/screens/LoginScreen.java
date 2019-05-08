@@ -1,37 +1,40 @@
 package com.hoekbank.bank.desktop.screens;
 
+import com.google.gson.JsonObject;
+import com.hoekbank.bank.desktop.api.API;
+import com.hoekbank.bank.desktop.api.APIService;
+import com.hoekbank.bank.desktop.helpers.AppDataContainer;
 import com.hoekbank.bank.desktop.ui.LoginScreenUI;
-import java.awt.event.KeyEvent;
+import com.sun.jersey.core.util.MultivaluedMapImpl;
 import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.GridPane;
 
+import javax.ws.rs.core.MultivaluedMap;
+
 public class LoginScreen extends LoginScreenUI {
 
     public LoginScreen(GridPane root) {
-        Alert errorAlert = new Alert(AlertType.ERROR);
+
         loginButton.setOnAction(e->{
             if (emailField.getText().isEmpty() && passwordField.getText().isEmpty()){
-                errorAlert.setTitle("Geen gegevens ingevuld");
-                errorAlert.setHeaderText("Alle velden zijn leeg");
-                errorAlert.setContentText("Voer een e-mailadres en wachtwoord in");
-                errorAlert.showAndWait();
-            } 
+                showError("Geen gegevens ingevuld",
+                        "Alle velden zijn leeg",
+                        "Voer een e-mailadres en wachtwoord in");
+            }
             else if(emailField.getText().isEmpty()){
-                errorAlert.setTitle("Geen e-mailadres ingevuld");
-                errorAlert.setHeaderText("Er is geen e-mailadres ingevuld");
-                errorAlert.setContentText("Voer een geldig e-mailadres in");
-                errorAlert.showAndWait();
+                showError("Geen e-mailadres ingevuld",
+                        "Er is geen e-mailadres ingevuld",
+                        "Voer een geldig e-mailadres in");
             }
             else if(passwordField.getText().isEmpty()){
-                errorAlert.setTitle("Geen wachtwoord ingevuld");
-                errorAlert.setHeaderText("Er is geen wachtwoord ingevuld");
-                errorAlert.setContentText("Voer een wachtwoord in");
-                errorAlert.showAndWait();
+                showError("Geen wachtwoord ingevuld",
+                        "Er is geen wachtwoord ingevuld",
+                        "Voer een wachtwoord in");
             }
             else{
-                System.out.println("Je bent ingelogd");
+                login();
             }
         });
                
@@ -46,5 +49,31 @@ public class LoginScreen extends LoginScreenUI {
         root.add(passwordLabel, 0, 4);
         root.add(passwordField, 0, 5);
         root.add(loginButton, 0, 6);
+    }
+
+    private void login() {
+        MultivaluedMap<String, String> formData = new MultivaluedMapImpl();
+        formData.add("email", emailField.getText());
+        formData.add("password", passwordField.getText());
+
+        JsonObject apiResponse = API.getInstance().post(APIService.USER_LOGIN, formData);
+
+        if(apiResponse.get("success") != null) {
+            AppDataContainer.getInstance().setUserToken(apiResponse.get("Token").getAsString());
+            // TODO: User mail check; customer or employee
+            // TODO: Next page
+        } else {
+            showError("",
+                    "Inloggen mislukt",
+                    apiResponse.get("message").getAsString());
+        }
+    }
+
+    private void showError(String title, String header, String content) {
+        Alert errorAlert = new Alert(AlertType.ERROR);
+        errorAlert.setTitle(title);
+        errorAlert.setHeaderText(header);
+        errorAlert.setContentText(content);
+        errorAlert.showAndWait();
     }
 }
