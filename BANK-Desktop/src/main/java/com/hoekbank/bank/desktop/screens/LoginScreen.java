@@ -1,6 +1,7 @@
 package com.hoekbank.bank.desktop.screens;
 
 import com.hoekbank.bank.desktop.ui.LoginScreenUI;
+import java.awt.event.KeyEvent;
 import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -29,8 +30,11 @@ public class LoginScreen extends LoginScreenUI {
                 errorAlert.setContentText("Voer een wachtwoord in");
                 errorAlert.showAndWait();
             }
+            else{
+                System.out.println("Je bent ingelogd");
+            }
         });
-        
+               
         root.setAlignment(Pos.CENTER);       
         root.setVgap(5);
         root.setHgap(5);
