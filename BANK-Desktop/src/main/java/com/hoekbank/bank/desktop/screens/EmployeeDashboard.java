@@ -10,7 +10,8 @@ public class EmployeeDashboard extends EmployeeDashboardUI {
             System.out.println("Je bent uitgelogd");
         });
         
-        root.getChildren().addAll(particulierRegister, bedrijfRegister, gemachtigdeRegister, logout, titleLabel, registerLabel, logoImageView, logoutImageView);
+        root.getChildren().addAll(particulierRegister, bedrijfRegister, gemachtigdeRegister, logout, 
+                titleLabel, registerLabel, logoImageView, logoutImageView);
         
     }
 }
