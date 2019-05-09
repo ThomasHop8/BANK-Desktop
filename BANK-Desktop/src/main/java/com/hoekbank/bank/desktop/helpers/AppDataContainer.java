@@ -4,6 +4,7 @@ public class AppDataContainer {
 
     private static AppDataContainer instance;
     private String userToken;
+    private Boolean userAccount;
 
     private AppDataContainer() {
     }

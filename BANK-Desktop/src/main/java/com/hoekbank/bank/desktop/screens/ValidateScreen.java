@@ -1,5 +1,6 @@
 package com.hoekbank.bank.desktop.screens;
 
+import com.hoekbank.bank.desktop.helpers.ScenesController;
 import com.hoekbank.bank.desktop.ui.ValidateScreenUI;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
@@ -7,6 +8,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -173,13 +175,9 @@ public class ValidateScreen extends ValidateScreenUI {
 
         });
 
-        btnTerug.setOnAction(event -> {
-            // todo Hier terug naar dashboard?
-            System.out.println("Knop terug clicked!");
-        });
+        btnTerug.setOnAction(event -> back());
 
         btnAfwijzen.setOnAction(event -> {
-//            System.out.println("btnAfwijzen clicked");
             try {
                 if (txtBsn.getText().isEmpty()) {
                     alertAfwijsWarning.setTitle("Oops!?");
@@ -205,10 +203,7 @@ public class ValidateScreen extends ValidateScreenUI {
                 Optional<ButtonType> alertResultAfwijzen = alertAfwijsBevestigen.showAndWait();
 
                 if (alertResultAfwijzen.isPresent() && alertResultAfwijzen.get() == ButtonType.OK) {
-
-                    // todo sql afwijzing opslaan?
-                    System.out.println("Afwijzing succes!");
-
+                    denyUser();
                 }
 
             } catch (Exception e) {
@@ -236,11 +231,7 @@ public class ValidateScreen extends ValidateScreenUI {
                 Optional<ButtonType> alertResultRegistreren = alertBtnRegisterBevestigen.showAndWait();
 
                 if (alertResultRegistreren.isPresent() && alertResultRegistreren.get() == ButtonType.OK) {
-
-                    // todo sql hier, controlle opslaan?
-                    System.out.println("Controlle succes!, Registreer pagina >");
-
-
+                    userValidated();
                 }
             } catch (Exception e) {
                 e.getMessage();
@@ -252,5 +243,21 @@ public class ValidateScreen extends ValidateScreenUI {
 
 //        root.getChildren().addAll(gridControle);
 
+    }
+
+    private void userValidated() {
+//        Pane registerPane = new Pane();
+//        new EmployeeDashboard(registerPane);
+//        ScenesController.setStage(registerPane);
+    }
+
+    private void denyUser() {
+
+    }
+
+    private void back() {
+        Pane employeePane = new Pane();
+        new EmployeeDashboard(employeePane);
+        ScenesController.setStage(employeePane);
     }
 }

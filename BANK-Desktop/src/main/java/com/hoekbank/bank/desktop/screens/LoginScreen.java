@@ -4,12 +4,14 @@ import com.google.gson.JsonObject;
 import com.hoekbank.bank.desktop.api.API;
 import com.hoekbank.bank.desktop.api.APIService;
 import com.hoekbank.bank.desktop.helpers.AppDataContainer;
+import com.hoekbank.bank.desktop.helpers.ScenesController;
 import com.hoekbank.bank.desktop.ui.LoginScreenUI;
 import com.sun.jersey.core.util.MultivaluedMapImpl;
 import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 
 import javax.ws.rs.core.MultivaluedMap;
 
@@ -60,13 +62,25 @@ public class LoginScreen extends LoginScreenUI {
 
         if(apiResponse.get("success") != null) {
             AppDataContainer.getInstance().setUserToken(apiResponse.get("Token").getAsString());
-            // TODO: User mail check; customer or employee
-            // TODO: Next page
+            if(apiResponse.get("Email").getAsString().contains("@hoekbank.tk")) {
+                Pane employeePane = new Pane();
+                new EmployeeDashboard(employeePane);
+                ScenesController.setStage(employeePane);
+            } else {
+                //TODO: klant dashboard
+                System.out.println("Klant");
+            }
+
+            showDashboard();
         } else {
             showError("",
                     "Inloggen mislukt",
                     apiResponse.get("message").getAsString());
         }
+    }
+
+    private void showDashboard() {
+
     }
 
     private void showError(String title, String header, String content) {
