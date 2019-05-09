@@ -5,6 +5,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 
+
 public class RegisterScreen extends RegisterScreenUI {
 
     public RegisterScreen(GridPane root) {
@@ -43,11 +44,11 @@ public class RegisterScreen extends RegisterScreenUI {
                 alert.showAndWait();
             }
                 
-                 if (!txttelefoon.getText().contains("[0-9]") ) {
+                 if (!txttelefoon.getText().matches("\\d+") ) {
             Alert alert = new Alert(AlertType.INFORMATION);
                 alert.setTitle("Foutmelding");
                 alert.setHeaderText("LET OP!");
-                alert.setContentText("Vul aub een geldig telefoonnummer in in");
+                alert.setContentText("Vul aub een geldig telefoonnummer in");
                 alert.showAndWait();
         }  
                 
@@ -61,11 +62,11 @@ public class RegisterScreen extends RegisterScreenUI {
                 alert.showAndWait();
             }
                 
-                            if (!txtstraatnaam.getText().contains("[A-Z]") ) {
+                            if (txtstraatnaam.getText().contains("1") || txtstraatnaam.getText().contains("2") || txtstraatnaam.getText().contains("3") || txtstraatnaam.getText().contains("4") || txtstraatnaam.getText().contains("5") || txtstraatnaam.getText().contains("6") || txtstraatnaam.getText().contains("7") || txtstraatnaam.getText().contains("8") || txtstraatnaam.getText().contains("9") || txtstraatnaam.getText().contains("0") ) {
             Alert alert = new Alert(AlertType.INFORMATION);
                 alert.setTitle("Foutmelding");
                 alert.setHeaderText("LET OP!");
-                alert.setContentText("Vul aub een geldige straatnaam in in");
+                alert.setContentText("Vul aub een geldige straatnaam in");
                 alert.showAndWait();
         }  
            
@@ -80,11 +81,11 @@ public class RegisterScreen extends RegisterScreenUI {
                 
             }
                 
-                             if (txthuisnummer.getText().contains("[0-9]") ) {
+            if (!txthuisnummer.getText().matches("\\w+") ) {
             Alert alert = new Alert(AlertType.INFORMATION);
                 alert.setTitle("Foutmelding");
                 alert.setHeaderText("LET OP!");
-                alert.setContentText("Vul aub een geldig telefoonnummer in in");
+                alert.setContentText("Vul aub een geldig huisnummer in!");
                 alert.showAndWait();
         }  
         	else if (txtwoonplaats.getText().equals("")) {
@@ -96,7 +97,7 @@ public class RegisterScreen extends RegisterScreenUI {
                 alert.showAndWait();
             }
                 
-                                        if (!txtwoonplaats.getText().contains("[A-Z]") ) {
+                                        if (!txtwoonplaats.getText().matches("\\D+") ) {
             Alert alert = new Alert(AlertType.INFORMATION);
                 alert.setTitle("Foutmelding");
                 alert.setHeaderText("LET OP!");
@@ -112,11 +113,11 @@ public class RegisterScreen extends RegisterScreenUI {
                 alert.showAndWait();
             }
                                         
-                      if (!txtpostcode.getText().contains("[A-Z]") && !txtpostcode.getText().contains("[0-9]") ) {
+                      if (!txtpostcode.getText().matches("\\w+") ) {
             Alert alert = new Alert(AlertType.INFORMATION);
                 alert.setTitle("Foutmelding");
                 alert.setHeaderText("LET OP!");
-                alert.setContentText("Vul aub een geldige woonplaats in in");
+                alert.setContentText("Vul aub een geldige postcode in in");
                 alert.showAndWait();
         }  
                 
@@ -176,7 +177,7 @@ public class RegisterScreen extends RegisterScreenUI {
         g.add(lblemail, 450, 206);
         g.add(txtemail, 450, 207);
         g.add(terugButton, 0, 8);
-        g.add(registerButton, 451, 208);  
+        g.add(registerButton, 451, 207);  
         
               
         
