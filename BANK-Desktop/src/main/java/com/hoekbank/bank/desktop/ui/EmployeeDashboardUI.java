@@ -6,13 +6,12 @@
 package com.hoekbank.bank.desktop.ui;
 
 import com.hoekbank.bank.desktop.BaseScreen;
-import javafx.geometry.Insets;
 
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.Background;
 import javafx.scene.text.Font;
 
 /**
@@ -23,7 +22,6 @@ public abstract class EmployeeDashboardUI extends BaseScreen {
     
     public Button particulierRegister, bedrijfRegister, gemachtigdeRegister, logout;
     public Label titleLabel, registerLabel;
-    public VBox vbLogo;
     public Image logoImage, logoutImage;
     public ImageView logoImageView, logoutImageView;
     
@@ -34,8 +32,9 @@ public abstract class EmployeeDashboardUI extends BaseScreen {
         gemachtigdeRegister = new Button("Gemachtigde registeren");
         
         titleLabel = new Label("Welkom Medewerker123");
-        registerLabel = new Label("Registreer acties");
         titleLabel.setFont(Font.font(28));
+        registerLabel = new Label("Registreer acties");
+        registerLabel.setFont(Font.font(18));
         
         particulierRegister.setPrefSize(150, 50);
         bedrijfRegister.setPrefSize(150, 50);
@@ -54,12 +53,14 @@ public abstract class EmployeeDashboardUI extends BaseScreen {
         logoutImageView.setFitHeight(50);
         logoutImageView.setFitWidth(136);
         logout.setGraphic(logoutImageView);
+        logout.setBackground(Background.EMPTY);
         
-        
-        vbLogo = new VBox();
-        vbLogo.setPadding(new Insets(0, 20, 10, 0));
-        vbLogo.getChildren().add(logoImageView);
-        
-        
+        logoImageView.relocate(20, 20);
+        titleLabel.relocate(170, 40);
+        logout.relocate(1104, 40);
+        registerLabel.relocate(170, 128);
+        particulierRegister.relocate(170, 165);
+        bedrijfRegister.relocate(360, 165);
+        gemachtigdeRegister.relocate(550, 165);
     }
 }
