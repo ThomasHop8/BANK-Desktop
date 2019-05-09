@@ -246,9 +246,10 @@ public class ValidateScreen extends ValidateScreenUI {
     }
 
     private void userValidated() {
-//        Pane registerPane = new Pane();
-//        new EmployeeDashboard(registerPane);
-//        ScenesController.setStage(registerPane);
+        GridPane registerPane = new GridPane();
+        RegisterScreen registerScreen = new RegisterScreen(registerPane);
+        registerScreen.userBSN = txtBsn.getText();
+        ScenesController.setStage(registerPane);
     }
 
     private void denyUser() {

@@ -35,8 +35,6 @@ public class MainApp extends Application {
         primaryStage.setHeight(screenHeight);
         primaryStage.setResizable(false);
         primaryStage.show();
-
-//        registerUser();
     }
 
     /**
@@ -49,25 +47,6 @@ public class MainApp extends Application {
      */
     public static void main(String[] args) {
         launch(args);
-    }
-
-
-    public void registerUser() {
-        User user = new User();
-        user.setFullname("Java Test");
-        user.setEmail("java@test.com");
-        user.setBsn("123123");
-        user.setHuisnummer("1B");
-        user.setPassword("wachtwoord");
-        user.setPostcode("1234AB");
-        user.setStraatnaam("Straatnaam");
-        user.setTelefoonnummer("06123456");
-        user.setWoonplaats("Woonplaats");
-
-        MultivaluedMap<String, String> formData = new MultivaluedMapImpl();
-        formData.add("user", user.serialize());
-
-        System.out.println(API.getInstance().post(APIService.USER_CREATE, formData));
     }
 
 }

@@ -1,11 +1,23 @@
 package com.hoekbank.bank.desktop.screens;
 
+import com.google.gson.JsonObject;
+import com.hoekbank.bank.desktop.api.API;
+import com.hoekbank.bank.desktop.api.APIService;
+import com.hoekbank.bank.desktop.helpers.AppDataContainer;
+import com.hoekbank.bank.desktop.helpers.ScenesController;
+import com.hoekbank.bank.desktop.models.User;
 import com.hoekbank.bank.desktop.ui.RegisterScreenUI;
+import com.sun.jersey.core.util.MultivaluedMapImpl;
 import javafx.scene.layout.GridPane;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.layout.Pane;
+
+import javax.ws.rs.core.MultivaluedMap;
 
 public class RegisterScreen extends RegisterScreenUI {
+
+    public String userBSN;
 
     public RegisterScreen(GridPane root) {
         GridPane g = new GridPane();
@@ -120,17 +132,16 @@ public class RegisterScreen extends RegisterScreenUI {
                 alert.setHeaderText("Lekker bezig pik!");
                 alert.setContentText("Registratie is voltooid!");
                 alert.showAndWait();
+
+                registerUser();
             }
 
         });
 
         terugButton.setOnAction(event -> {
-            Alert alert = new Alert(AlertType.INFORMATION);
-            alert.setTitle("Rogier heeft een kleine piemel");
-            alert.setHeaderText("Ah oh!");
-            alert.setContentText("Er is nog helemaal geen ander scherm, waar de fuck wil je naar terug?");
-
-            alert.showAndWait();
+            GridPane loginPane = new GridPane();
+            new LoginScreen(loginPane);
+            ScenesController.setStage(loginPane);
         });
 
         g.add(lblnaam, 450, 200);
@@ -152,5 +163,34 @@ public class RegisterScreen extends RegisterScreenUI {
 
         root.getChildren().add(g);
 
+    }
+
+    public void registerUser() {
+        User user = new User();
+        user.setFullname(txtnaam.getText());
+        user.setEmail(txtemail.getText());
+        user.setBsn(userBSN);
+        user.setHuisnummer(txthuisnummer.getText());
+        user.setPassword("123");
+        user.setPostcode(txtpostcode.getText());
+        user.setStraatnaam(txtstraatnaam.getText());
+        user.setTelefoonnummer(txttelefoon.getText());
+        user.setWoonplaats(txtwoonplaats.getText());
+
+        MultivaluedMap<String, String> formData = new MultivaluedMapImpl();
+        formData.add("user", user.serialize());
+
+        JsonObject apiResponse = API.getInstance().post(APIService.USER_CREATE, formData);
+
+        if(apiResponse.get("success") != null) {
+            GridPane loginPane = new GridPane();
+            new LoginScreen(loginPane);
+            ScenesController.setStage(loginPane);
+        } else {
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setHeaderText("Registratie Mislukt");
+            alert.setContentText(apiResponse.get("message").getAsString());
+            alert.showAndWait();
+        }
     }
 }

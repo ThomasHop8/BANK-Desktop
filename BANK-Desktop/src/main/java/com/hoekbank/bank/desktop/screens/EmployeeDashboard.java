@@ -1,5 +1,6 @@
 package com.hoekbank.bank.desktop.screens;
 
+import com.hoekbank.bank.desktop.helpers.AppDataContainer;
 import com.hoekbank.bank.desktop.helpers.ScenesController;
 import com.hoekbank.bank.desktop.ui.EmployeeDashboardUI;
 import javafx.scene.layout.GridPane;
@@ -23,6 +24,8 @@ public class EmployeeDashboard extends EmployeeDashboardUI {
 
         root.getChildren().addAll(particulierRegister, bedrijfRegister, gemachtigdeRegister, logout, 
                 titleLabel, registerLabel, logoImageView, logoutImageView);
+
+        System.out.println(AppDataContainer.getInstance().getUserToken());
         
     }
 
