@@ -5,7 +5,6 @@ import com.hoekbank.bank.desktop.ui.SplashScreenUI;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.GridPane;
 import javafx.util.Duration;
@@ -21,8 +20,8 @@ public class SplashScreen extends SplashScreenUI {
 
         fade.playFromStart();
         fade.setOnFinished(event -> {
-            BorderPane loginPane = new BorderPane();
-            new TransactionScreen(loginPane);
+            GridPane loginPane = new GridPane();
+            new LoginScreen(loginPane);
             ScenesController.setStage(loginPane);
         });
 
