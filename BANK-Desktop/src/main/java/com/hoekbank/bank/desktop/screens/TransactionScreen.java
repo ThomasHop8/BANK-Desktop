@@ -47,6 +47,7 @@ public class TransactionScreen extends TransactionScreenUI {
     public ObservableList<Transactie> getTransactie() {
         ObservableList<Transactie> transacties = FXCollections.observableArrayList();
         transacties.add(new Transactie("13-5-2019", "Lening", 50.00, 0,5000) );
-
+        
+        return getTransactie();
     }
 }
