@@ -8,8 +8,11 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Paint;
 
 /**
  * @author Chahine
@@ -34,7 +37,7 @@ public class TransactionScreen extends TransactionScreenUI {
          */
         // Kolom Datum
         TableColumn<Transactie, String> datumColunm = new TableColumn<>("Datum");
-        datumColunm.setMinWidth(100);
+        datumColunm.setMinWidth(70);
         datumColunm.setCellValueFactory(new PropertyValueFactory<>("datum"));
 
         // Kolom Omschrijving
@@ -55,12 +58,16 @@ public class TransactionScreen extends TransactionScreenUI {
         // Kolom Saldo
         TableColumn<Transactie, Double> saldoColunm = new TableColumn<>("Saldo");
         saldoColunm.setMinWidth(100);
+        saldoColunm.setMaxWidth(100);
         saldoColunm.setCellValueFactory(new PropertyValueFactory<>("saldo"));
 
         // Toevoegen in Table TableTransacties.
         tableTransacties.setItems(getTransactie());
         tableTransacties.getColumns().addAll(datumColunm,omschrijvingColunm,bedragInColunm,bedragUitColunm,saldoColunm);
+        tableTransacties.columnResizePolicyProperty();
 
+        tableTransacties.getStylesheets().add("styles/TableView.css");
+        tableTransacties.setMinWidth(620);
 
         /**
          * GridTop
@@ -82,16 +89,37 @@ public class TransactionScreen extends TransactionScreenUI {
         gridCenter.add(lbTitel,0,0);
         gridCenter.add(tableTransacties,0,1);
 
+        btnTerug.setOnAction( event -> back());
 
     }
 
     // All transactions
-    public ObservableList<Transactie> getTransactie() {
+    private ObservableList<Transactie> getTransactie() {
         ObservableList<Transactie> transacties = FXCollections.observableArrayList();
+        transacties.add(new Transactie("13-5-2019", "Lening", 50.00, 0,5000) ); // todo remove dummy
+        transacties.add(new Transactie("13-5-2019", "Lening", 50.00, 0,5000) ); // todo remove dummy
+        transacties.add(new Transactie("13-5-2019", "Lening", 50.00, 0,5000) ); // todo remove dummy
+        transacties.add(new Transactie("13-5-2019", "Lening", 50.00, 0,5000) ); // todo remove dummy
+        transacties.add(new Transactie("13-5-2019", "Lening", 50.00, 0,5000) ); // todo remove dummy
+        transacties.add(new Transactie("13-5-2019", "Lening", 50.00, 0,5000) ); // todo remove dummy
+        transacties.add(new Transactie("13-5-2019", "Lening", 50.00, 0,5000) ); // todo remove dummy
+        transacties.add(new Transactie("13-5-2019", "Lening", 50.00, 0,5000) ); // todo remove dummy
+        transacties.add(new Transactie("13-5-2019", "Lening", 50.00, 0,5000) ); // todo remove dummy
+        transacties.add(new Transactie("13-5-2019", "Lening", 50.00, 0,5000) ); // todo remove dummy
+        transacties.add(new Transactie("13-5-2019", "Lening", 50.00, 0,5000) ); // todo remove dummy
+        transacties.add(new Transactie("13-5-2019", "Lening", 50.00, 0,5000) ); // todo remove dummy
+        transacties.add(new Transactie("13-5-2019", "Lening", 50.00, 0,5000) ); // todo remove dummy
         transacties.add(new Transactie("13-5-2019", "Lening", 50.00, 0,5000) ); // todo remove dummy
 
         // todo van database ophalen
 
         return transacties;
+    }
+
+    private void back() {
+        // todo wijzigen voor terug knop
+//        Pane employeePane = new Pane();
+//        new EmployeeDashboard(employeePane);
+//        ScenesController.setStage(employeePane);
     }
 }
