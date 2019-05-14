@@ -3,6 +3,7 @@ package com.hoekbank.bank.desktop.screens;
 import com.google.gson.JsonObject;
 import com.hoekbank.bank.desktop.api.API;
 import com.hoekbank.bank.desktop.api.APIService;
+import com.hoekbank.bank.desktop.enums.RegisterState;
 import com.hoekbank.bank.desktop.helpers.AppDataContainer;
 import com.hoekbank.bank.desktop.helpers.ScenesController;
 import com.hoekbank.bank.desktop.ui.ValidateScreenUI;
@@ -29,8 +30,14 @@ import java.util.Optional;
 
 public class ValidateScreen extends ValidateScreenUI {
 
+    private RegisterState registerState;
 
     public ValidateScreen(GridPane root) {
+        registerState = AppDataContainer.getInstance().getRegisterState();
+
+        if(registerState == RegisterState.COMPANY)
+            lbTitle.setText("Bedrijf Controleren");
+
         /**
          * GridPane links, Controle
          */

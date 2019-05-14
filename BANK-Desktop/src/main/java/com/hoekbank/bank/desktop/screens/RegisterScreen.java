@@ -3,6 +3,7 @@ package com.hoekbank.bank.desktop.screens;
 import com.google.gson.JsonObject;
 import com.hoekbank.bank.desktop.api.API;
 import com.hoekbank.bank.desktop.api.APIService;
+import com.hoekbank.bank.desktop.enums.RegisterState;
 import com.hoekbank.bank.desktop.helpers.AppDataContainer;
 import com.hoekbank.bank.desktop.helpers.ScenesController;
 import com.hoekbank.bank.desktop.models.User;
@@ -19,9 +20,12 @@ import java.util.Optional;
 
 public class RegisterScreen extends RegisterScreenUI {
 
+    private RegisterState registerState;
     public String userBSN;
 
     public RegisterScreen(GridPane root) {
+        registerState = AppDataContainer.getInstance().getRegisterState();
+
         GridPane g = new GridPane();
         root.getChildren().addAll(registerButton, txtnaam, txtstraatnaam, txtwoonplaats, txttelefoon, txthuisnummer, txtemail, txtpostcode, lblnaam, lblstraatnaam, lblwoonplaats, lbltelefoon, lblhuisnummer, lblemail, lblpostcode);
         g.setHgap(1);
