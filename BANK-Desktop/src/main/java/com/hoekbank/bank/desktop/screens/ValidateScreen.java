@@ -1,7 +1,12 @@
 package com.hoekbank.bank.desktop.screens;
 
+import com.google.gson.JsonObject;
+import com.hoekbank.bank.desktop.api.API;
+import com.hoekbank.bank.desktop.api.APIService;
+import com.hoekbank.bank.desktop.helpers.AppDataContainer;
 import com.hoekbank.bank.desktop.helpers.ScenesController;
 import com.hoekbank.bank.desktop.ui.ValidateScreenUI;
+import com.sun.jersey.core.util.MultivaluedMapImpl;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -13,6 +18,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
+import javax.ws.rs.core.MultivaluedMap;
 import java.sql.SQLOutput;
 import java.util.Optional;
 
@@ -253,7 +259,29 @@ public class ValidateScreen extends ValidateScreenUI {
     }
 
     private void denyUser() {
+        MultivaluedMap<String, String> formData = new MultivaluedMapImpl();
+        formData.add("idnum", txtBsn.getText());
+        formData.add("reason", txtRedenAfwijzing.getText());
 
+        JsonObject apiResponse = API.getInstance().post(APIService.USER_REJECT, formData);
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+
+        if(apiResponse.get("error").getAsBoolean()) {
+            alert.setAlertType(Alert.AlertType.INFORMATION);
+            alert.setHeaderText("Afwijzing Succesvol!");
+            alert.setContentText("De gebruiker met identiciatiecode " +  txtBsn.getText() + " is succesvol afgewezen!");
+
+            Optional<ButtonType> result = alert.showAndWait();
+            ButtonType button = result.orElse(ButtonType.CANCEL);
+            if (button == ButtonType.OK) {
+                back();
+            }
+        } else {
+            alert.setAlertType(Alert.AlertType.ERROR);
+            alert.setHeaderText("Afwijzing Mislukt");
+            alert.setContentText("De gebruiker met identiciatiecode " +  txtBsn.getText() + " is al afgewezen!");
+            alert.showAndWait();
+        }
     }
 
     private void back() {
