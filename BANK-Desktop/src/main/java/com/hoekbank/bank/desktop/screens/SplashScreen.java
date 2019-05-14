@@ -25,7 +25,7 @@ public class SplashScreen extends SplashScreenUI {
             ScenesController.setStage(loginPane);
         });
 
-        root.setStyle("-fx-background-color: #000");
+        root.setStyle("-fx-background-color: #FFF");
         root.getChildren().addAll(container);
     }
 
