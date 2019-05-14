@@ -10,6 +10,8 @@ import com.sun.jersey.core.util.MultivaluedMapImpl;
 import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 
@@ -51,6 +53,13 @@ public class LoginScreen extends LoginScreenUI {
         root.add(passwordLabel, 0, 4);
         root.add(passwordField, 0, 5);
         root.add(loginButton, 0, 6);
+
+        root.addEventHandler(KeyEvent.KEY_PRESSED, ev -> {
+            if (ev.getCode() == KeyCode.ENTER) {
+                loginButton.fire();
+                ev.consume();
+            }
+        });
     }
 
     private void login() {
