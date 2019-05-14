@@ -8,7 +8,7 @@ package com.hoekbank.bank.desktop.ui;
 import com.hoekbank.bank.desktop.BaseScreen;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
+import javafx.scene.control.TableView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
@@ -21,7 +21,7 @@ import javafx.scene.text.Font;
 public abstract class UserOverviewUI extends BaseScreen {
     public Button logout, addRekening, transactions;
     public Label titleLabel, rekeningLabel, addRekeningLabel;
-    public ListView listRekeningen;
+    public TableView tableRekeningen;
     public Image logoImage, logoutImage;
     public ImageView logoImageView, logoutImageView;
     
@@ -41,8 +41,8 @@ public abstract class UserOverviewUI extends BaseScreen {
         transactions = new Button("Bekijk transacties");
         transactions.setFont(Font.font(16));
         
-        listRekeningen = new ListView();
-        listRekeningen.setPrefSize(452, 200);
+        tableRekeningen = new TableView();
+        tableRekeningen.setPrefSize(452, 200);
         
         logoutImage = new Image("/images/logout.png");
         logout = new Button();
@@ -59,7 +59,7 @@ public abstract class UserOverviewUI extends BaseScreen {
         logoImageView.setFitHeight(80);
         logoImageView.setFitWidth(80);
         
-        listRekeningen.relocate(290, 213);
+        tableRekeningen.relocate(290, 213);
         titleLabel.relocate(290, 40);
         rekeningLabel.relocate(290, 180);
         addRekeningLabel.relocate(750, 175);
