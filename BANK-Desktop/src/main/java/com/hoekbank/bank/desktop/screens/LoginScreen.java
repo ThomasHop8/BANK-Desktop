@@ -68,7 +68,9 @@ public class LoginScreen extends LoginScreenUI {
                 ScenesController.setStage(employeePane);
             } else {
                 //TODO: klant dashboard
-                System.out.println("Klant");
+                Pane userOverview = new Pane();
+                new UserOverview(userOverview);
+                ScenesController.setStage(userOverview);
             }
 
             showDashboard();
