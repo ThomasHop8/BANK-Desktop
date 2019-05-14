@@ -8,12 +8,14 @@ import com.hoekbank.bank.desktop.helpers.ScenesController;
 import com.hoekbank.bank.desktop.models.User;
 import com.hoekbank.bank.desktop.ui.RegisterScreenUI;
 import com.sun.jersey.core.util.MultivaluedMapImpl;
+import javafx.scene.control.ButtonType;
 import javafx.scene.layout.GridPane;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.Pane;
 
 import javax.ws.rs.core.MultivaluedMap;
+import java.util.Optional;
 
 public class RegisterScreen extends RegisterScreenUI {
 
@@ -183,9 +185,17 @@ public class RegisterScreen extends RegisterScreenUI {
         JsonObject apiResponse = API.getInstance().post(APIService.USER_CREATE, formData);
 
         if(apiResponse.get("success") != null) {
-            GridPane loginPane = new GridPane();
-            new LoginScreen(loginPane);
-            ScenesController.setStage(loginPane);
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setHeaderText("Registratie Voltooid!");
+            alert.setContentText("De gebruiker " + user.getFullname() + " is succesvol aangemaakt. Een mail met het wachtwoord is naar " + user.getEmail() + " gestuurd.");
+
+            Optional<ButtonType> result = alert.showAndWait();
+            ButtonType button = result.orElse(ButtonType.CANCEL);
+            if (button == ButtonType.OK) {
+                GridPane dashboardPane = new GridPane();
+                new EmployeeDashboard(dashboardPane);
+                ScenesController.setStage(dashboardPane);
+            }
         } else {
             Alert alert = new Alert(AlertType.ERROR);
             alert.setHeaderText("Registratie Mislukt");
