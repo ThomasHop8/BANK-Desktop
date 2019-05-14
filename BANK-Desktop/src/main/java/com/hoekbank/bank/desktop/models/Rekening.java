@@ -11,11 +11,13 @@ package com.hoekbank.bank.desktop.models;
  */
 public class Rekening {
     private String rekeningnummer, rekeninghouder, rekeningsoort;
+    private double saldo;
     
-    public Rekening(String rekeningnummer, String rekeninghouder, String rekeningsoort){
+    public Rekening(String rekeningnummer, String rekeninghouder, String rekeningsoort, double saldo){
         this.rekeningnummer = rekeningnummer;
         this.rekeninghouder = rekeninghouder;
         this.rekeningsoort = rekeningsoort;
+        this.saldo = saldo;
     }
     
     public String getRekeningnummer(){
@@ -40,5 +42,13 @@ public class Rekening {
     
     public void setRekeningsoort(String rekeningsoort){
         this.rekeningsoort = rekeningsoort;
+    }
+    
+    public double getSaldo(){
+        return saldo;
+    }
+    
+    public void setSaldo(double saldo){
+        this.saldo = saldo;
     }
 }
