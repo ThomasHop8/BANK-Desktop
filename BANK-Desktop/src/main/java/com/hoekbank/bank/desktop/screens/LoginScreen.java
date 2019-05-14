@@ -4,6 +4,7 @@ import com.google.gson.JsonObject;
 import com.hoekbank.bank.desktop.api.API;
 import com.hoekbank.bank.desktop.api.APIService;
 import com.hoekbank.bank.desktop.helpers.AppDataContainer;
+import com.hoekbank.bank.desktop.helpers.Randompasswordgenerator;
 import com.hoekbank.bank.desktop.helpers.ScenesController;
 import com.hoekbank.bank.desktop.ui.LoginScreenUI;
 import com.sun.jersey.core.util.MultivaluedMapImpl;
@@ -18,7 +19,11 @@ import javax.ws.rs.core.MultivaluedMap;
 public class LoginScreen extends LoginScreenUI {
 
     public LoginScreen(GridPane root) {
-
+       
+        String p = Randompasswordgenerator.generatePassword(10);
+        
+        System.out.println("Dit is uw wachtwoord:" + p);
+        
         loginButton.setOnAction(e->{
             if (emailField.getText().isEmpty() && passwordField.getText().isEmpty()){
                 showError("Geen gegevens ingevuld",
