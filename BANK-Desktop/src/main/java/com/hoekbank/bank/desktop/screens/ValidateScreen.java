@@ -2,6 +2,8 @@ package com.hoekbank.bank.desktop.screens;
 
 import com.hoekbank.bank.desktop.helpers.ScenesController;
 import com.hoekbank.bank.desktop.ui.ValidateScreenUI;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -44,6 +46,15 @@ public class ValidateScreen extends ValidateScreenUI {
         // Fonts, Colors
         lbTitle.setFont(Font.font("Arial", FontWeight.BOLD, 20));
         lbTitle.setTextFill(Color.BLACK);
+
+
+        // Numbers only
+        txtBsn.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("\\d*")) {
+                txtBsn.setText(newValue.replaceAll("[^\\d]", ""));
+            }
+        });
+
 
         /**
          * Add UI on GridPane links
