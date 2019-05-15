@@ -35,8 +35,10 @@ public class ValidateScreen extends ValidateScreenUI {
     public ValidateScreen(GridPane root) {
         registerState = AppDataContainer.getInstance().getRegisterState();
 
-        if(registerState == RegisterState.COMPANY)
+        if(registerState == RegisterState.COMPANY) {
             lbTitle.setText("Bedrijf Controleren");
+            lbBsn.setText("KvK");
+        }
 
         /**
          * GridPane links, Controle

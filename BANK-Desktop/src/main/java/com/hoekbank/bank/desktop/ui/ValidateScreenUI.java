@@ -30,7 +30,7 @@ public abstract class ValidateScreenUI extends BaseScreen {
         txtRedenAfwijzing.setPromptText("Reden?");
         // Labels
         lbTitle = new Label("Gebruiker Controleren");
-        lbBsn = new Label("BSN / KvK");
+        lbBsn = new Label("BSN");
         lbBkrGoedkeuren = new Label ("BKR Afgekeurd?");
         lbZwarteLijst = new Label("Aanwezig in zwarte lijst?");
         lbRedenAfwijzing = new Label("Reden van afwijzing?");
