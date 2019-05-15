@@ -144,6 +144,12 @@ public class RegisterScreen extends RegisterScreenUI {
 
                 registerUser();
             }
+            if (registerState == RegisterState.REPRESENTATIVE) {
+                GridPane repPane = new GridPane();
+                new RepScreen(repPane);
+                ScenesController.setStage(repPane);
+        }
+            
 
         });
 
@@ -209,5 +215,6 @@ public class RegisterScreen extends RegisterScreenUI {
             alert.setContentText(apiResponse.get("message").getAsString());
             alert.showAndWait();
         }
+        
     }
 }
