@@ -10,7 +10,7 @@ import javafx.scene.control.TableView;
 public abstract class TransactionScreenUI extends BaseScreen {
 
     public Button btnTerug;
-    public Label lbTitel;
+    public Label lbTitel, lbSaldo;
     public TableView<Transactie> tableTransacties;
 
 
@@ -21,8 +21,10 @@ public abstract class TransactionScreenUI extends BaseScreen {
         btnTerug = new Button("< Terug");
         // Labels
         lbTitel = new Label("Transacties");
+        lbSaldo = new Label("Saldo");
         // TableView
         tableTransacties = new TableView<>();
+
 
     }
 }

@@ -7,6 +7,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.TableColumn;
@@ -15,7 +16,10 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 
 /**
  * @author Chahine
@@ -34,6 +38,13 @@ public class TransactionScreen extends TransactionScreenUI {
         // Borderpane settings, aangeven waar de panes komen te staan.
         root.setTop(gridTop);
         root.setCenter(gridCenter);
+        root.setStyle("-fx-background-color: #FFFF");
+
+        // Style, Fonts
+        lbTitel.setFont(Font.font("Arial", FontWeight.BOLD, 20));
+        lbTitel.setTextFill(Color.BLACK);
+        lbSaldo.setFont(Font.font("Arial", FontWeight.BOLD, 20));
+        lbTitel.setTextFill(Color.BLACK);
 
         /**
          * Setup Colunms van TableView
@@ -103,7 +114,10 @@ public class TransactionScreen extends TransactionScreenUI {
         gridCenter.setAlignment(Pos.CENTER);
         // Elementen toevoegen
         gridCenter.add(lbTitel,0,0);
+        gridCenter.add(lbSaldo, 0,0);
+        gridCenter.setHalignment(lbSaldo, HPos.RIGHT);
         gridCenter.add(tableTransacties,0,1);
+
 
         btnTerug.setOnAction( event -> back());
 
@@ -133,6 +147,7 @@ public class TransactionScreen extends TransactionScreenUI {
     }
 
     private void back() {
+        System.out.println("Terug knop clicked!");
         // todo wijzigen voor terug knop
 //        Pane employeePane = new Pane();
 //        new EmployeeDashboard(employeePane);
