@@ -5,6 +5,7 @@ import com.hoekbank.bank.desktop.api.API;
 import com.hoekbank.bank.desktop.api.APIService;
 import com.hoekbank.bank.desktop.enums.RegisterState;
 import com.hoekbank.bank.desktop.helpers.AppDataContainer;
+import com.hoekbank.bank.desktop.helpers.Randompasswordgenerator;
 import com.hoekbank.bank.desktop.helpers.ScenesController;
 import com.hoekbank.bank.desktop.models.User;
 import com.hoekbank.bank.desktop.ui.RegisterScreenUI;
@@ -136,12 +137,6 @@ public class RegisterScreen extends RegisterScreenUI {
             }
             
             else {
-                Alert alert = new Alert(AlertType.CONFIRMATION);
-                alert.setTitle("Goed gedaan");
-                alert.setHeaderText("Lekker bezig pik!");
-                alert.setContentText("Registratie is voltooid!");
-                alert.showAndWait();
-
                 registerUser();
             }
 
@@ -180,7 +175,7 @@ public class RegisterScreen extends RegisterScreenUI {
         user.setEmail(txtemail.getText());
         user.setBsn(userBSN);
         user.setHuisnummer(txthuisnummer.getText());
-        user.setPassword("123");
+        user.setPassword(Randompasswordgenerator.generatePassword(10));
         user.setPostcode(txtpostcode.getText());
         user.setStraatnaam(txtstraatnaam.getText());
         user.setTelefoonnummer(txttelefoon.getText());

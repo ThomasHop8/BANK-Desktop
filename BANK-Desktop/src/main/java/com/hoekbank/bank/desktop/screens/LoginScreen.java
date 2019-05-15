@@ -22,10 +22,6 @@ public class LoginScreen extends LoginScreenUI {
 
     public LoginScreen(GridPane root) {
        
-        String p = Randompasswordgenerator.generatePassword(10);
-        
-        System.out.println("Dit is uw wachtwoord:" + p);
-        
         loginButton.setOnAction(e->{
             if (emailField.getText().isEmpty() && passwordField.getText().isEmpty()){
                 showError("Geen gegevens ingevuld",
