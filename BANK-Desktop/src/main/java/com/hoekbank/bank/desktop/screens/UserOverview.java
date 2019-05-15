@@ -11,6 +11,8 @@ import com.hoekbank.bank.desktop.ui.UserOverviewUI;
 import com.sun.javafx.scene.control.skin.TableHeaderRow;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 
@@ -47,9 +49,9 @@ public class UserOverview extends UserOverviewUI {
     
     private ObservableList<Rekening>getRekening(){
             ObservableList<Rekening> rekeningen = FXCollections.observableArrayList();
-            rekeningen.add(new Rekening("013246789", "Kevin Trouw", "Betaalrekening", 320.53));
-            rekeningen.add(new Rekening("9876543210", "Kevin Trouw", "Betaalrekening", 200.20));
-            rekeningen.add(new Rekening("0246813579", "Kevin Trouw", "Spaarrekening", 4000.70));
+            rekeningen.add(new Rekening(new ImageView(new Image("/images/iconBetaalrekening.png")), "013246789", "Kevin Trouw", "Betaalrekening", 320.53));
+            rekeningen.add(new Rekening(new ImageView(new Image("/images/iconBetaalrekening.png")), "9876543210", "Kevin Trouw", "Betaalrekening", 200.20));
+            rekeningen.add(new Rekening(new ImageView(new Image("/images/iconSpaarrekening.png")), "0246813579", "Kevin Trouw", "Spaarrekening", 4000.70));
             
             return rekeningen;
         }

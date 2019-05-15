@@ -45,7 +45,6 @@ public abstract class UserOverviewUI extends BaseScreen {
         transactions.setFont(Font.font(16));
         
         tableRekeningen = new TableView<>();
-        tableRekeningen.setPrefHeight(200);
         
         TableColumn<Rekening, String>rekeningnummerColumn = new TableColumn<>("Rekeningnummer");
         rekeningnummerColumn.setMinWidth(150);
@@ -71,8 +70,14 @@ public abstract class UserOverviewUI extends BaseScreen {
         saldoColumn.setSortable(false);
         saldoColumn.setCellValueFactory(new PropertyValueFactory<>("saldo"));
         
-        tableRekeningen.getColumns().addAll(rekeningnummerColumn, rekeninghouderColumn, rekeningsoortColumn, saldoColumn);
+        TableColumn<Rekening, ImageView>iconColumn = new TableColumn<>("");
+        iconColumn.setCellValueFactory(new PropertyValueFactory<Rekening, ImageView>("icon"));
+        //iconColumn.setStyle("-fx-alignment: CENTER;");
+        
+        
+        tableRekeningen.getColumns().addAll(iconColumn, rekeningnummerColumn, rekeninghouderColumn, rekeningsoortColumn, saldoColumn);
         tableRekeningen.getStylesheets().add("styles/TableView.css");
+        tableRekeningen.setPrefHeight(200);
         
         logoutImage = new Image("/images/logout.png");
         logout = new Button();
@@ -95,7 +100,7 @@ public abstract class UserOverviewUI extends BaseScreen {
         addRekeningLabel.relocate(750, 175);
         logout.relocate(1104, 40);
         addRekening.relocate(705, 170);
-        transactions.relocate(697, 423);
+        transactions.relocate(780, 423);
         logoImageView.relocate(20, 20);
     }
     

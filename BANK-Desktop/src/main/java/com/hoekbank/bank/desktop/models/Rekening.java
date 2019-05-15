@@ -5,6 +5,8 @@
  */
 package com.hoekbank.bank.desktop.models;
 
+import javafx.scene.image.ImageView;
+
 /**
  *
  * @author kevin
@@ -12,12 +14,21 @@ package com.hoekbank.bank.desktop.models;
 public class Rekening {
     private String rekeningnummer, rekeninghouder, rekeningsoort;
     private double saldo;
+    private ImageView icon;
     
-    public Rekening(String rekeningnummer, String rekeninghouder, String rekeningsoort, double saldo){
+    public Rekening(ImageView icon, String rekeningnummer, String rekeninghouder, String rekeningsoort, double saldo){
         this.rekeningnummer = rekeningnummer;
         this.rekeninghouder = rekeninghouder;
         this.rekeningsoort = rekeningsoort;
         this.saldo = saldo;
+        this.icon = icon;
+    }
+    public ImageView getIcon(){
+        return icon;
+    }
+    
+    public void setIcon(ImageView value){
+        icon = value;
     }
     
     public String getRekeningnummer(){
@@ -51,4 +62,5 @@ public class Rekening {
     public void setSaldo(double saldo){
         this.saldo = saldo;
     }
+    
 }
