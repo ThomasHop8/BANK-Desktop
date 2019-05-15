@@ -9,7 +9,9 @@ import com.hoekbank.bank.desktop.BaseScreen;
 import com.hoekbank.bank.desktop.models.Rekening;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
@@ -44,6 +46,24 @@ public abstract class UserOverviewUI extends BaseScreen {
         
         tableRekeningen = new TableView<>();
         tableRekeningen.setPrefHeight(200);
+        
+        TableColumn<Rekening, String>rekeningnummerColumn = new TableColumn<>("Rekeningnummer");
+        rekeningnummerColumn.setMinWidth(80);
+        rekeningnummerColumn.setCellValueFactory(new PropertyValueFactory<>("rekeningnummer"));
+        
+        TableColumn<Rekening, String>rekeninghouderColumn = new TableColumn<>("Rekeninghouder");
+        rekeninghouderColumn.setMinWidth(120);
+        rekeninghouderColumn.setCellValueFactory(new PropertyValueFactory<>("rekeninghouder"));
+        
+        TableColumn<Rekening, String>rekeningsoortColumn = new TableColumn<>("Rekeningsoort");
+        rekeningsoortColumn.setMinWidth(150);
+        rekeningsoortColumn.setCellValueFactory(new PropertyValueFactory<>("rekeningsoort"));
+        
+        TableColumn<Rekening, String>saldoColumn = new TableColumn<>("Saldo");
+        saldoColumn.setMinWidth(100);
+        saldoColumn.setCellValueFactory(new PropertyValueFactory<>("saldo"));
+        
+        tableRekeningen.getColumns().addAll(rekeningnummerColumn, rekeninghouderColumn, rekeningsoortColumn, saldoColumn);
         
         logoutImage = new Image("/images/logout.png");
         logout = new Button();

@@ -10,8 +10,6 @@ import com.hoekbank.bank.desktop.models.Rekening;
 import com.hoekbank.bank.desktop.ui.UserOverviewUI;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 
@@ -21,24 +19,9 @@ import javafx.scene.layout.Pane;
  */
 public class UserOverview extends UserOverviewUI {
     public UserOverview(Pane root) {
-        TableColumn<Rekening, String>rekeningnummerColumn = new TableColumn<>("Rekeningnummer");
-        rekeningnummerColumn.setMinWidth(80);
-        rekeningnummerColumn.setCellValueFactory(new PropertyValueFactory<>("rekeningnummer"));
         
-        TableColumn<Rekening, String>rekeninghouderColumn = new TableColumn<>("Rekeninghouder");
-        rekeninghouderColumn.setMinWidth(120);
-        rekeninghouderColumn.setCellValueFactory(new PropertyValueFactory<>("rekeninghouder"));
-        
-        TableColumn<Rekening, String>rekeningsoortColumn = new TableColumn<>("Rekeningsoort");
-        rekeningsoortColumn.setMinWidth(150);
-        rekeningsoortColumn.setCellValueFactory(new PropertyValueFactory<>("rekeningsoort"));
-        
-        TableColumn<Rekening, String>saldoColumn = new TableColumn<>("Saldo");
-        saldoColumn.setMinWidth(100);
-        saldoColumn.setCellValueFactory(new PropertyValueFactory<>("saldo"));
         
         tableRekeningen.setItems(getRekening());
-        tableRekeningen.getColumns().addAll(rekeningnummerColumn, rekeninghouderColumn, rekeningsoortColumn, saldoColumn);
         tableRekeningen.columnResizePolicyProperty();
         
         
