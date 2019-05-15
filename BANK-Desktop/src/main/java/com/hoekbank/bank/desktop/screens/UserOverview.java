@@ -8,6 +8,7 @@ package com.hoekbank.bank.desktop.screens;
 import com.hoekbank.bank.desktop.helpers.ScenesController;
 import com.hoekbank.bank.desktop.models.Rekening;
 import com.hoekbank.bank.desktop.ui.UserOverviewUI;
+import com.sun.javafx.scene.control.skin.TableHeaderRow;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.layout.GridPane;
@@ -23,7 +24,12 @@ public class UserOverview extends UserOverviewUI {
         
         tableRekeningen.setItems(getRekening());
         tableRekeningen.columnResizePolicyProperty();
-        
+        tableRekeningen.widthProperty().addListener((source, oldWidth, newWidth)->{
+            TableHeaderRow header = (TableHeaderRow) tableRekeningen.lookup("TableHeaderRow");
+            header.reorderingProperty().addListener((observable, oldValue, newValue)->{
+                header.setReordering(false);
+            });
+        });
         
         
         addRekening.setOnAction(e ->{

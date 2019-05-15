@@ -48,22 +48,31 @@ public abstract class UserOverviewUI extends BaseScreen {
         tableRekeningen.setPrefHeight(200);
         
         TableColumn<Rekening, String>rekeningnummerColumn = new TableColumn<>("Rekeningnummer");
-        rekeningnummerColumn.setMinWidth(80);
+        rekeningnummerColumn.setMinWidth(150);
+        rekeningnummerColumn.setMaxWidth(150);
+        rekeningnummerColumn.setSortable(false);
         rekeningnummerColumn.setCellValueFactory(new PropertyValueFactory<>("rekeningnummer"));
         
         TableColumn<Rekening, String>rekeninghouderColumn = new TableColumn<>("Rekeninghouder");
-        rekeninghouderColumn.setMinWidth(120);
+        rekeninghouderColumn.setMinWidth(150);
+        rekeninghouderColumn.setMaxWidth(150);
+        rekeninghouderColumn.setSortable(false);
         rekeninghouderColumn.setCellValueFactory(new PropertyValueFactory<>("rekeninghouder"));
         
         TableColumn<Rekening, String>rekeningsoortColumn = new TableColumn<>("Rekeningsoort");
         rekeningsoortColumn.setMinWidth(150);
+        rekeningsoortColumn.setMaxWidth(150);
+        rekeningsoortColumn.setSortable(false);
         rekeningsoortColumn.setCellValueFactory(new PropertyValueFactory<>("rekeningsoort"));
         
         TableColumn<Rekening, String>saldoColumn = new TableColumn<>("Saldo");
         saldoColumn.setMinWidth(100);
+        saldoColumn.setMaxWidth(100);
+        saldoColumn.setSortable(false);
         saldoColumn.setCellValueFactory(new PropertyValueFactory<>("saldo"));
         
         tableRekeningen.getColumns().addAll(rekeningnummerColumn, rekeninghouderColumn, rekeningsoortColumn, saldoColumn);
+        tableRekeningen.getStylesheets().add("styles/TableView.css");
         
         logoutImage = new Image("/images/logout.png");
         logout = new Button();
@@ -86,7 +95,7 @@ public abstract class UserOverviewUI extends BaseScreen {
         addRekeningLabel.relocate(750, 175);
         logout.relocate(1104, 40);
         addRekening.relocate(705, 170);
-        transactions.relocate(599, 423);
+        transactions.relocate(697, 423);
         logoImageView.relocate(20, 20);
     }
     
