@@ -7,6 +7,7 @@ package com.hoekbank.bank.desktop.ui;
 
 import com.hoekbank.bank.desktop.BaseScreen;
 import com.hoekbank.bank.desktop.models.Rekening;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -15,21 +16,31 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
+
 
 /**
  *
  * @author kevin
  */
 public abstract class UserOverviewUI extends BaseScreen {
-    public Button logout, addRekening, transactions;
-    public Label titleLabel, rekeningLabel, addRekeningLabel;
+    public Button logout, addRekening, transactions, spaarrekening, betaalrekening;
+    public Label titleLabel, rekeningLabel, addRekeningLabel,popup;
     public TableView<Rekening> tableRekeningen;
     public Image logoImage, logoutImage;
     public ImageView logoImageView, logoutImageView;
+ 
     
     @Override
     protected void setupMainUI() {
+        popup = new Label();
+
+        popup.relocate(200, 200);
+        
         
         titleLabel = new Label("Welkom Klant123");
         titleLabel.setFont(Font.font(28));
@@ -73,6 +84,16 @@ public abstract class UserOverviewUI extends BaseScreen {
         logoutImageView.setFitWidth(136);
         logout.setGraphic(logoutImageView);
         logout.setBackground(Background.EMPTY);
+        spaarrekening = new Button("Spaarrekening");
+        spaarrekening.setFont(Font.font ("Verdana", 20));
+        betaalrekening = new Button("Betaalrekening");
+        betaalrekening.setFont(Font.font ("Verdana", 20));
+        
+         spaarrekening.setBackground(new Background(new BackgroundFill(Color.rgb(255,255,255), CornerRadii.EMPTY, Insets.EMPTY)));
+         betaalrekening.setBackground(new Background(new BackgroundFill(Color.rgb(255,255,255), CornerRadii.EMPTY, Insets.EMPTY)));
+      
+     	
+		
         
         logoImage = new Image("/images/logo.png");
         logoImageView = new ImageView();
