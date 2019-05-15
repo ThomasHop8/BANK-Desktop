@@ -30,6 +30,9 @@ public class RegisterScreen extends RegisterScreenUI {
         root.getChildren().addAll(registerButton, txtnaam, txtstraatnaam, txtwoonplaats, txttelefoon, txthuisnummer, txtemail, txtpostcode, lblnaam, lblstraatnaam, lblwoonplaats, lbltelefoon, lblhuisnummer, lblemail, lblpostcode);
         g.setHgap(1);
         g.setVgap(1);
+        
+        if (registerState == RegisterState.COMPANY)
+        	lblnaam.setText("Bedrijfsnaam");
 
         registerButton.setOnAction(event -> {
 
@@ -145,9 +148,9 @@ public class RegisterScreen extends RegisterScreenUI {
         });
 
         terugButton.setOnAction(event -> {
-            GridPane loginPane = new GridPane();
-            new LoginScreen(loginPane);
-            ScenesController.setStage(loginPane);
+            GridPane validatePane = new GridPane();
+            new ValidateScreen(validatePane);
+            ScenesController.setStage(validatePane);
         });
 
         g.add(lblnaam, 450, 200);

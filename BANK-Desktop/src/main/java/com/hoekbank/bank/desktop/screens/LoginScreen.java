@@ -42,7 +42,7 @@ public class LoginScreen extends LoginScreenUI {
             }
         });
                
-        root.setAlignment(Pos.CENTER);       
+     
         root.setVgap(5);
         root.setHgap(5);
         
