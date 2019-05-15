@@ -2,7 +2,8 @@ package com.hoekbank.bank.desktop.api;
 
 public enum APIService {
     USER_CREATE("/user/create"),
-    USER_LOGIN("/user/login");
+    USER_LOGIN("/user/login"),
+    ACCOUNT_LIST("/account/get/all");
 
     private String url;
 

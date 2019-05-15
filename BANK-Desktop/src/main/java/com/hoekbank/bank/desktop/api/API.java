@@ -1,6 +1,6 @@
 package com.hoekbank.bank.desktop.api;
 
-import com.google.gson.JsonObject;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import com.hoekbank.bank.desktop.Hoekbank;
 import com.hoekbank.bank.desktop.helpers.AppDataContainer;
@@ -22,10 +22,10 @@ public class API {
         client = Client.create();
     }
 
-    public JsonObject post(APIService apiService, MultivaluedMap<String, String> formData) {
+    public JsonElement post(APIService apiService, MultivaluedMap<String, String> formData) {
         webResource = client.resource(Hoekbank.BASE_URL + apiService.url());
 
-        return new JsonParser().parse(makeRestCall(formData)).getAsJsonObject();
+        return new JsonParser().parse(makeRestCall(formData));
     }
 
     public static synchronized API getInstance( ) {

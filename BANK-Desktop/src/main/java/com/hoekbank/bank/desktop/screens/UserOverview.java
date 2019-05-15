@@ -5,16 +5,24 @@
  */
 package com.hoekbank.bank.desktop.screens;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.hoekbank.bank.desktop.api.API;
+import com.hoekbank.bank.desktop.api.APIService;
 import com.hoekbank.bank.desktop.helpers.ScenesController;
 import com.hoekbank.bank.desktop.models.Rekening;
 import com.hoekbank.bank.desktop.ui.UserOverviewUI;
 import com.sun.javafx.scene.control.skin.TableHeaderRow;
+import com.sun.jersey.core.util.MultivaluedMapImpl;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+
+import javax.ws.rs.core.MultivaluedMap;
 
 /**
  *
@@ -28,9 +36,7 @@ public class UserOverview extends UserOverviewUI {
         tableRekeningen.columnResizePolicyProperty();
         tableRekeningen.widthProperty().addListener((source, oldWidth, newWidth)->{
             TableHeaderRow header = (TableHeaderRow) tableRekeningen.lookup("TableHeaderRow");
-            header.reorderingProperty().addListener((observable, oldValue, newValue)->{
-                header.setReordering(false);
-            });
+            header.reorderingProperty().addListener((observable, oldValue, newValue)-> header.setReordering(false));
         });
         
         
@@ -47,15 +53,24 @@ public class UserOverview extends UserOverviewUI {
         root.getChildren().addAll(logout, addRekening, transactions, titleLabel, rekeningLabel, addRekeningLabel, tableRekeningen, logoImageView, logoutImageView);
     }
     
-    private ObservableList<Rekening>getRekening(){
-            ObservableList<Rekening> rekeningen = FXCollections.observableArrayList();
-            rekeningen.add(new Rekening(new ImageView(new Image("/images/iconBetaalrekening.png")), "013246789", "Kevin Trouw", "Betaalrekening", 320.53));
-            rekeningen.add(new Rekening(new ImageView(new Image("/images/iconBetaalrekening.png")), "9876543210", "Kevin Trouw", "Betaalrekening", 200.20));
-            rekeningen.add(new Rekening(new ImageView(new Image("/images/iconSpaarrekening.png")), "0246813579", "Kevin Trouw", "Spaarrekening", 4000.70));
-            
-            return rekeningen;
+    private ObservableList<Rekening>getRekening() {
+        ObservableList<Rekening> rekeningen = FXCollections.observableArrayList();
+
+        for (JsonElement rekening : getAccounts()) {
+            JsonObject object = rekening.getAsJsonObject();
+            rekeningen.add(new Rekening(new ImageView(new Image("/images/iconBetaalrekening.png")), object.get("RekeningNr").getAsString(), object.get("Volledige Naam").getAsString(), "Betaalrekening", object.get("Saldo").getAsDouble()));
         }
-    
+
+        return rekeningen;
+    }
+
+    private JsonArray getAccounts() {
+        MultivaluedMap<String, String> formData = new MultivaluedMapImpl();
+        formData.add("user", "1");
+
+        return API.getInstance().post(APIService.ACCOUNT_LIST, formData).getAsJsonArray();
+    }
+
     private void logout(){
         GridPane loginPane = new GridPane();
         new LoginScreen(loginPane);
