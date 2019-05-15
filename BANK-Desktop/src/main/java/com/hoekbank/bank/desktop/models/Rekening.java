@@ -17,7 +17,7 @@ public class Rekening {
     private ImageView icon;
     
     public Rekening(ImageView icon, String rekeningnummer, String rekeninghouder, String rekeningsoort, double saldo){
-        this.rekeningnummer = rekeningnummer;
+        this.rekeningnummer = converRekeningNummer(rekeningnummer);
         this.rekeninghouder = rekeninghouder;
         this.rekeningsoort = rekeningsoort;
         this.saldo = saldo;
@@ -64,7 +64,18 @@ public class Rekening {
     }
 
 
-    private void converRekeningNummer() {
+    private String converRekeningNummer(String rekNr) {
+        String newRekNr = rekNr;
 
+        for (int i = 0; i < rekNr.length(); i++) {
+            switch (i) {
+                case 3:
+                case 6:
+                case 9:
+                    newRekNr = new StringBuilder(newRekNr).insert(i, ".").toString();
+            }
+        }
+
+        return newRekNr;
     }
 }
