@@ -65,9 +65,9 @@ public class UserOverview extends UserOverviewUI {
         });
         
         
-        addRekening.setOnAction(e ->{
-            System.out.println("Je wordt doorverwezen naar de \"rekening toevoegen pagina\"");
-        });
+     //   addRekening.setOnAction(e ->{
+      //      System.out.println("Je wordt doorverwezen naar de \"rekening toevoegen pagina\"");
+     //   });
 
         betaalrekening1.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -76,32 +76,25 @@ public class UserOverview extends UserOverviewUI {
                     System.out.println("BetaalrekeningXDXD");  
             }
         });
-           //   BorderStroke b = new BorderStroke(Color.AQUA, BorderStrokeStyle.SOLID, new CornerRadii(50), new BorderWidths(10));
-           //   VBox boot = new VBox();
-          //    boot.setBackground(new Background(new BackgroundFill(Color.rgb(255,255,255), CornerRadii.EMPTY, Insets.EMPTY)));
-          //    Border bd = new Border(b);
-        //   boot.setBorder(bd);     
-   //   boot.relocate(900, 210);
-      //         root.getChildren().add(boot);
-      //        boot.setPadding(new Insets(5));
-      //      boot.setSpacing(5);
-        
-
         contextMenu.getItems().addAll(spaarrekening1, betaalrekening1);
+        contextMenu.setAnchorX(400);
+        contextMenu.setAnchorY(400);
      
         addRekening.setOnAction(e -> {
-            contextMenu.show(addRekening, 1100, 400);
-        });
+           contextMenu.show(addRekening, addRekening.getLayoutX(), addRekening.getLayoutY());
 
-        addRekening.setOnContextMenuRequested(new EventHandler<ContextMenuEvent>() {
-            @Override
-            public void handle(ContextMenuEvent event) {
+       });
 
-                contextMenu.show(betaalrekening, event.getScreenX(), event.getScreenY());
-                contextMenu.show(spaarrekening, event.getScreenX(), event.getScreenY());
+    //    addRekening.setOnContextMenuRequested(new EventHandler<ContextMenuEvent>() {
+    ////        @Override
+        
+       //public void handle(ContextMenuEvent event) {
 
-            }
-        });
+         //       contextMenu.show(betaalrekening, event.getScreenX(), event.getScreenY());
+           //     contextMenu.show(spaarrekening, event.getScreenX(), event.getScreenY());
+
+            //}
+       // });
 
         transactions.setOnAction(e -> {
             System.out.println("Je wordt doorverwezen naar de \"transactie pagina\"");
