@@ -68,7 +68,7 @@ public class LoginScreen extends LoginScreenUI {
         formData.add("email", emailField.getText());
         formData.add("password", passwordField.getText());
 
-        JsonObject apiResponse = API.getInstance().post(APIService.USER_LOGIN, formData);
+        JsonObject apiResponse = API.getInstance().post(APIService.USER_LOGIN, formData).getAsJsonObject();
 
         if(apiResponse.get("success") != null) {
             AppDataContainer.getInstance().setUserToken(apiResponse.get("Token").getAsString());
@@ -78,7 +78,9 @@ public class LoginScreen extends LoginScreenUI {
                 ScenesController.setStage(employeePane);
             } else {
                 //TODO: klant dashboard
-                System.out.println("Klant");
+                Pane userOverview = new Pane();
+                new UserOverview(userOverview);
+                ScenesController.setStage(userOverview);
             }
 
             showDashboard();

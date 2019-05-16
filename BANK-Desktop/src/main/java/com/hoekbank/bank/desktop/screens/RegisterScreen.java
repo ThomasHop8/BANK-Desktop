@@ -184,7 +184,7 @@ public class RegisterScreen extends RegisterScreenUI {
         MultivaluedMap<String, String> formData = new MultivaluedMapImpl();
         formData.add("user", user.serialize());
 
-        JsonObject apiResponse = API.getInstance().post(APIService.USER_CREATE, formData);
+        JsonObject apiResponse = API.getInstance().post(APIService.USER_CREATE, formData).getAsJsonObject();
 
         if(apiResponse.get("success") != null) {
             Alert alert = new Alert(AlertType.INFORMATION);
