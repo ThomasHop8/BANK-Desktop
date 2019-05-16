@@ -58,7 +58,17 @@ public class UserOverview extends UserOverviewUI {
 
         for (JsonElement rekening : getAccounts()) {
             JsonObject object = rekening.getAsJsonObject();
-            rekeningen.add(new Rekening(new ImageView(new Image("/images/iconBetaalrekening.png")), object.get("RekeningNr").getAsString(), object.get("Volledige Naam").getAsString(), object.get("TypeNaam").getAsString(), object.get("Saldo").getAsDouble()));
+            String rekHouder;
+
+            if(!object.get("Volledige Naam").isJsonNull()) {
+                rekHouder = object.get("Volledige Naam").getAsString();
+            } else if(!object.get("Bedrijfsnaam").isJsonNull()) {
+                rekHouder = object.get("Bedrijfsnaam").getAsString();
+            } else {
+                continue;
+            }
+
+            rekeningen.add(new Rekening(new ImageView(new Image("/images/iconBetaalrekening.png")), object.get("RekeningNr").getAsString(), rekHouder, object.get("TypeNaam").getAsString(), object.get("Saldo").getAsDouble()));
         }
 
         return rekeningen;
