@@ -1,8 +1,14 @@
 package com.hoekbank.bank.desktop.screens;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.hoekbank.bank.desktop.api.API;
+import com.hoekbank.bank.desktop.api.APIService;
 import com.hoekbank.bank.desktop.models.Transactie;
 import com.hoekbank.bank.desktop.ui.TransactionScreenUI;
 import com.sun.javafx.scene.control.skin.TableHeaderRow;
+import com.sun.jersey.core.util.MultivaluedMapImpl;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -20,6 +26,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+
+import javax.ws.rs.core.MultivaluedMap;
 
 /**
  * @author Chahine
@@ -126,24 +134,21 @@ public class TransactionScreen extends TransactionScreenUI {
     // All transactions
     private ObservableList<Transactie> getTransactie() {
         ObservableList<Transactie> transacties = FXCollections.observableArrayList();
-        transacties.add(new Transactie("13-5-2019", "Lening", 50.00, 0,5000) ); // todo remove dummy
-        transacties.add(new Transactie("13-5-2019", "Lening", 50.00, 0,5000) ); // todo remove dummy
-        transacties.add(new Transactie("13-5-2019", "Lening", 50.00, 0,5000) ); // todo remove dummy
-        transacties.add(new Transactie("13-5-2019", "Lening", 50.00, 0,5000) ); // todo remove dummy
-        transacties.add(new Transactie("13-5-2019", "Lening", 50.00, 0,5000) ); // todo remove dummy
-        transacties.add(new Transactie("13-5-2019", "Lening", 50.00, 0,5000) ); // todo remove dummy
-        transacties.add(new Transactie("13-5-2019", "Lening", 50.00, 0,5000) ); // todo remove dummy
-        transacties.add(new Transactie("13-5-2019", "Lening", 50.00, 0,5000) ); // todo remove dummy
-        transacties.add(new Transactie("13-5-2019", "Lening", 50.00, 0,5000) ); // todo remove dummy
-        transacties.add(new Transactie("13-5-2019", "Lening", 50.00, 0,5000) ); // todo remove dummy
-        transacties.add(new Transactie("13-5-2019", "Lening", 50.00, 0,5000) ); // todo remove dummy
-        transacties.add(new Transactie("13-5-2019", "Lening", 50.00, 0,5000) ); // todo remove dummy
-        transacties.add(new Transactie("13-5-2019", "Lening", 50.00, 0,5000) ); // todo remove dummy
-        transacties.add(new Transactie("13-5-2019", "Lening", 50.00, 0,5000) ); // todo remove dummy
 
-        // todo van database ophalen
+        for (JsonElement transaction : getTransactions()) {
+            JsonObject object = transaction.getAsJsonObject();
+            transacties.add(new Transactie(object.get("TransTime").getAsString(), "nvt", object.get("Bedrag").getAsDouble(), object.get("Bedrag").getAsDouble(),0));
+        }
 
         return transacties;
+    }
+
+    private JsonArray getTransactions() {
+        MultivaluedMap<String, String> formData = new MultivaluedMapImpl();
+        formData.add("user", "1");
+        formData.add("accountNr", "0000000001");
+
+        return API.getInstance().post(APIService.ACCOUNT_TRANSACTIONS, formData).getAsJsonArray();
     }
 
     private void back() {
