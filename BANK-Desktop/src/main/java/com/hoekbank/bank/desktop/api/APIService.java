@@ -4,7 +4,8 @@ public enum APIService {
     USER_CREATE("/user/create"),
     USER_REJECT("/user/reject"),
     USER_LOGIN("/user/login"),
-    ACCOUNT_LIST("/account/get/all");
+    ACCOUNT_LIST("/account/get/all"),
+    ACCOUNT_TRANSACTIONS("/account/get/transactions");
 
     private String url;
 

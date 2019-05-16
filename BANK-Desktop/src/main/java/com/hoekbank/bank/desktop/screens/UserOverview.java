@@ -19,6 +19,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 
@@ -44,8 +46,13 @@ public class UserOverview extends UserOverviewUI {
             System.out.println("Je wordt doorverwezen naar de \"rekening toevoegen pagina\"");
         });
         
-        transactions.setOnAction(e ->{
-            System.out.println("Je wordt doorverwezen naar de \"transactie pagina\"");
+        transactions.setOnAction(e -> {
+            String selectedRekNr = tableRekeningen.getSelectionModel().getSelectedItem().getRekeningnummer();
+            selectedRekNr = selectedRekNr.replace(".", "");
+
+            BorderPane transPane = new BorderPane();
+            new TransactionScreen(transPane, selectedRekNr);
+            ScenesController.setStage(transPane);
         });
         
         logout.setOnAction(e -> logout());
@@ -81,7 +88,7 @@ public class UserOverview extends UserOverviewUI {
         return API.getInstance().post(APIService.ACCOUNT_LIST, formData).getAsJsonArray();
     }
 
-    private void logout(){
+    private void logout() {
         GridPane loginPane = new GridPane();
         new LoginScreen(loginPane);
         ScenesController.setStage(loginPane);
