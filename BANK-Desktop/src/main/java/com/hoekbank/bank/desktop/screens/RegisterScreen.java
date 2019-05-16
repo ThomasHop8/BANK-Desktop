@@ -194,7 +194,7 @@ public class RegisterScreen extends RegisterScreenUI {
             Optional<ButtonType> result = alert.showAndWait();
             ButtonType button = result.orElse(ButtonType.CANCEL);
             if (button == ButtonType.OK) {
-                GridPane dashboardPane = new GridPane();
+                Pane dashboardPane = new Pane();
                 new EmployeeDashboard(dashboardPane);
                 ScenesController.setStage(dashboardPane);
             }
