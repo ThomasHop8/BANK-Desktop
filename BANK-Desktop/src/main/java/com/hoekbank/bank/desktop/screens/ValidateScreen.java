@@ -272,7 +272,7 @@ public class ValidateScreen extends ValidateScreenUI {
         formData.add("idnum", txtBsn.getText());
         formData.add("reason", txtRedenAfwijzing.getText());
 
-        JsonObject apiResponse = API.getInstance().post(APIService.USER_REJECT, formData);
+        JsonObject apiResponse = API.getInstance().post(APIService.USER_REJECT, formData).getAsJsonObject();
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
 
         if(apiResponse.get("error").getAsBoolean()) {
