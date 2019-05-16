@@ -1,8 +1,15 @@
 package com.hoekbank.bank.desktop.screens;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.hoekbank.bank.desktop.api.API;
+import com.hoekbank.bank.desktop.api.APIService;
 import com.hoekbank.bank.desktop.helpers.ScenesController;
 import com.hoekbank.bank.desktop.models.Rekening;
 import com.hoekbank.bank.desktop.ui.UserOverviewUI;
+import com.sun.javafx.scene.control.skin.TableHeaderRow;
+import com.sun.jersey.core.util.MultivaluedMapImpl;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -20,17 +27,27 @@ import javafx.scene.layout.BorderStroke;
 import javafx.scene.layout.BorderStrokeStyle;
 import javafx.scene.layout.BorderWidths;
 import javafx.scene.layout.CornerRadii;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 
+import javax.ws.rs.core.MultivaluedMap;
+
+/**
+ *
+ * @author kevin
+ */
+
 public class UserOverview extends UserOverviewUI {
 
     public UserOverview(Pane root) {
         tableRekeningen.setItems(getRekening());
         tableRekeningen.columnResizePolicyProperty();
+
         ContextMenu contextMenu = new ContextMenu();
         MenuItem spaarrekening1 = new MenuItem("Spaarrekening");
         MenuItem betaalrekening1 = new MenuItem("Betaalrekening");
@@ -40,6 +57,16 @@ public class UserOverview extends UserOverviewUI {
             public void handle(ActionEvent event) {
                 System.out.println("SpaarrekeningXDXD");
             }
+        });
+            
+        tableRekeningen.widthProperty().addListener((source, oldWidth, newWidth)->{
+            TableHeaderRow header = (TableHeaderRow) tableRekeningen.lookup("TableHeaderRow");
+            header.reorderingProperty().addListener((observable, oldValue, newValue)-> header.setReordering(false));
+        });
+        
+        
+        addRekening.setOnAction(e ->{
+            System.out.println("Je wordt doorverwezen naar de \"rekening toevoegen pagina\"");
         });
 
         betaalrekening1.setOnAction(new EventHandler<ActionEvent>() {
@@ -85,16 +112,35 @@ public class UserOverview extends UserOverviewUI {
 
     }
 
-    private ObservableList<Rekening> getRekening() {
+    private ObservableList<Rekening>getRekening() {
         ObservableList<Rekening> rekeningen = FXCollections.observableArrayList();
-        rekeningen.add(new Rekening("013246789", "Kevin Trouw", "Betaalrekening", 320.53));
-        rekeningen.add(new Rekening("9876543210", "Kevin Trouw", "Betaalrekening", 200.20));
-        rekeningen.add(new Rekening("0246813579", "Kevin Trouw", "Spaarrekening", 4000.70));
+
+        for (JsonElement rekening : getAccounts()) {
+            JsonObject object = rekening.getAsJsonObject();
+            String rekHouder;
+
+            if(!object.get("Volledige Naam").isJsonNull()) {
+                rekHouder = object.get("Volledige Naam").getAsString();
+            } else if(!object.get("Bedrijfsnaam").isJsonNull()) {
+                rekHouder = object.get("Bedrijfsnaam").getAsString();
+            } else {
+                continue;
+            }
+
+            rekeningen.add(new Rekening(new ImageView(new Image("/images/iconBetaalrekening.png")), object.get("RekeningNr").getAsString(), rekHouder, object.get("TypeNaam").getAsString(), object.get("Saldo").getAsDouble()));
+        }
 
         return rekeningen;
     }
 
-    private void logout() {
+    private JsonArray getAccounts() {
+        MultivaluedMap<String, String> formData = new MultivaluedMapImpl();
+        formData.add("user", "1");
+
+        return API.getInstance().post(APIService.ACCOUNT_LIST, formData).getAsJsonArray();
+    }
+
+    private void logout(){
         GridPane loginPane = new GridPane();
         new LoginScreen(loginPane);
         ScenesController.setStage(loginPane);
