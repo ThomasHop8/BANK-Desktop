@@ -6,6 +6,7 @@ public class AppDataContainer {
 
     private static AppDataContainer instance;
     private String userToken;
+    private String userID;
     private RegisterState registerState;
 
     private AppDataContainer() {
@@ -32,5 +33,13 @@ public class AppDataContainer {
 
     public void setRegisterState(RegisterState registerState) {
         this.registerState = registerState;
+    }
+
+    public String getUserID() {
+        return userID;
+    }
+
+    public void setUserID(String userID) {
+        this.userID = userID;
     }
 }

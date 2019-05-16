@@ -72,6 +72,8 @@ public class LoginScreen extends LoginScreenUI {
 
         if(apiResponse.get("success") != null) {
             AppDataContainer.getInstance().setUserToken(apiResponse.get("Token").getAsString());
+            AppDataContainer.getInstance().setUserID(apiResponse.get("UserID").getAsString());
+
             if(apiResponse.get("Email").getAsString().contains("@hoekbank.tk")) {
                 Pane employeePane = new Pane();
                 new EmployeeDashboard(employeePane);

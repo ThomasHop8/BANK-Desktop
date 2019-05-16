@@ -5,6 +5,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.hoekbank.bank.desktop.api.API;
 import com.hoekbank.bank.desktop.api.APIService;
+import com.hoekbank.bank.desktop.helpers.AppDataContainer;
 import com.hoekbank.bank.desktop.helpers.ScenesController;
 import com.hoekbank.bank.desktop.models.Transactie;
 import com.hoekbank.bank.desktop.ui.TransactionScreenUI;
@@ -148,7 +149,7 @@ public class TransactionScreen extends TransactionScreenUI {
 
     private JsonArray getTransactions() {
         MultivaluedMap<String, String> formData = new MultivaluedMapImpl();
-        formData.add("user", "1");
+        formData.add("user", AppDataContainer.getInstance().getUserID());
         formData.add("accountNr", selectedRekNum);
 
         return API.getInstance().post(APIService.ACCOUNT_TRANSACTIONS, formData).getAsJsonArray();

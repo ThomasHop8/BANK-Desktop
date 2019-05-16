@@ -10,6 +10,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.hoekbank.bank.desktop.api.API;
 import com.hoekbank.bank.desktop.api.APIService;
+import com.hoekbank.bank.desktop.helpers.AppDataContainer;
 import com.hoekbank.bank.desktop.helpers.ScenesController;
 import com.hoekbank.bank.desktop.models.Rekening;
 import com.hoekbank.bank.desktop.ui.UserOverviewUI;
@@ -83,7 +84,7 @@ public class UserOverview extends UserOverviewUI {
 
     private JsonArray getAccounts() {
         MultivaluedMap<String, String> formData = new MultivaluedMapImpl();
-        formData.add("user", "1");
+        formData.add("user", AppDataContainer.getInstance().getUserID());
 
         return API.getInstance().post(APIService.ACCOUNT_LIST, formData).getAsJsonArray();
     }
