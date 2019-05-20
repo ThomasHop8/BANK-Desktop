@@ -15,6 +15,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.geometry.Side;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuButton;
@@ -77,11 +78,8 @@ public class UserOverview extends UserOverviewUI {
             }
         });
         contextMenu.getItems().addAll(spaarrekening1, betaalrekening1);
-        contextMenu.setAnchorX(400);
-        contextMenu.setAnchorY(400);
-     
         addRekening.setOnAction(e -> {
-           contextMenu.show(addRekening, addRekening.getLayoutX(), addRekening.getLayoutY());
+           contextMenu.show(addRekening, Side.BOTTOM, addRekening.getLayoutX(), addRekening.getLayoutY());
 
        });
 
