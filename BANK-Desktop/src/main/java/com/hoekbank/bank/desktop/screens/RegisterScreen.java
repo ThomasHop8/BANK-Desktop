@@ -11,6 +11,7 @@ import com.hoekbank.bank.desktop.models.User;
 import com.hoekbank.bank.desktop.ui.RegisterScreenUI;
 import com.sun.jersey.core.util.MultivaluedMapImpl;
 import javafx.scene.control.ButtonType;
+import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -24,7 +25,8 @@ public class RegisterScreen extends RegisterScreenUI {
     private RegisterState registerState;
     public String userBSN;
 
-    public RegisterScreen(GridPane root) {
+    public RegisterScreen(Pane root) {
+        setupLogin(RegisterState.EMPLOYEE, "Medewerker");
         registerState = AppDataContainer.getInstance().getRegisterState();
 
         GridPane g = new GridPane();
@@ -142,11 +144,7 @@ public class RegisterScreen extends RegisterScreenUI {
 
         });
 
-        terugButton.setOnAction(event -> {
-            GridPane validatePane = new GridPane();
-            new ValidateScreen(validatePane);
-            ScenesController.setStage(validatePane);
-        });
+        terugButton.setOnAction(event -> back());
 
         g.add(lblnaam, 450, 200);
         g.add(txtnaam, 450, 201);
@@ -165,8 +163,29 @@ public class RegisterScreen extends RegisterScreenUI {
         g.add(terugButton, 0, 8);
         g.add(registerButton, 451, 207);
 
-        root.getChildren().add(g);
+        registerGridPane.getChildren().add(g);
 
+        pageContainer.getChildren().add(registerGridPane);
+        root.getChildren().add(appContainer);
+    }
+
+    @Override
+    protected Image getCoverImage() {
+        return new Image("/images/background_covers/registration.png");
+    }
+
+    @Override
+    protected String getPageTitle() {
+        return "REGISTREREN";
+    }
+
+    @Override
+    protected void back() {
+        super.back();
+
+        GridPane validatePane = new GridPane();
+        new ValidateScreen(validatePane);
+        ScenesController.setStage(validatePane);
     }
 
     public void registerUser() {

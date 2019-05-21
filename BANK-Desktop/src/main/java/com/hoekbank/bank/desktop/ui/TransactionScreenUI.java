@@ -5,9 +5,12 @@ import com.hoekbank.bank.desktop.models.Transactie;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
+import javafx.scene.layout.BorderPane;
 
 
 public abstract class TransactionScreenUI extends BaseScreen {
+
+    public BorderPane transactionBorderPane;
 
     public Button btnTerug;
     public Label lbTitel, lbSaldo;
@@ -16,6 +19,8 @@ public abstract class TransactionScreenUI extends BaseScreen {
 
     @Override
     protected void setupMainUI() {
+
+        transactionBorderPane = new BorderPane();
 
         // Knoppen
         btnTerug = new Button("< Terug");

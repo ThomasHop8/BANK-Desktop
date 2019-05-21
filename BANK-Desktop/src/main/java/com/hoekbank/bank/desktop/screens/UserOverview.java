@@ -10,6 +10,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.hoekbank.bank.desktop.api.API;
 import com.hoekbank.bank.desktop.api.APIService;
+import com.hoekbank.bank.desktop.enums.RegisterState;
 import com.hoekbank.bank.desktop.helpers.AppDataContainer;
 import com.hoekbank.bank.desktop.helpers.ScenesController;
 import com.hoekbank.bank.desktop.models.Rekening;
@@ -32,8 +33,9 @@ import javax.ws.rs.core.MultivaluedMap;
  * @author kevin
  */
 public class UserOverview extends UserOverviewUI {
+
     public UserOverview(Pane root) {
-        
+        setupLogin(RegisterState.USER, "Gebruiker");
         
         tableRekeningen.setItems(getRekening());
         tableRekeningen.columnResizePolicyProperty();
@@ -51,14 +53,25 @@ public class UserOverview extends UserOverviewUI {
             String selectedRekNr = tableRekeningen.getSelectionModel().getSelectedItem().getRekeningnummer();
             selectedRekNr = selectedRekNr.replace(".", "");
 
-            BorderPane transPane = new BorderPane();
+            Pane transPane = new Pane();
             new TransactionScreen(transPane, selectedRekNr);
             ScenesController.setStage(transPane);
         });
         
-        logout.setOnAction(e -> logout());
-        
-        root.getChildren().addAll(logout, addRekening, transactions, titleLabel, rekeningLabel, addRekeningLabel, tableRekeningen, logoImageView, logoutImageView);
+        userOverviewPane.getChildren().addAll(logout, addRekening, transactions, titleLabel, rekeningLabel, addRekeningLabel, tableRekeningen, logoImageView, logoutImageView);
+
+        pageContainer.getChildren().add(userOverviewPane);
+        root.getChildren().add(appContainer);
+    }
+
+    @Override
+    protected Image getCoverImage() {
+        return new Image("/images/background_covers/accounts.png");
+    }
+
+    @Override
+    protected String getPageTitle() {
+        return "REKENINGEN";
     }
     
     private ObservableList<Rekening>getRekening() {
@@ -87,12 +100,6 @@ public class UserOverview extends UserOverviewUI {
         formData.add("user", AppDataContainer.getInstance().getUserID());
 
         return API.getInstance().post(APIService.ACCOUNT_LIST, formData).getAsJsonArray();
-    }
-
-    private void logout() {
-        GridPane loginPane = new GridPane();
-        new LoginScreen(loginPane);
-        ScenesController.setStage(loginPane);
     }
 }
 

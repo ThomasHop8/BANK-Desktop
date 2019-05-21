@@ -4,12 +4,15 @@ import com.hoekbank.bank.desktop.enums.RegisterState;
 import com.hoekbank.bank.desktop.helpers.AppDataContainer;
 import com.hoekbank.bank.desktop.helpers.ScenesController;
 import com.hoekbank.bank.desktop.ui.EmployeeDashboardUI;
+import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 
 public class EmployeeDashboard extends EmployeeDashboardUI {
 
     public EmployeeDashboard(Pane root) {
+        setupLogin(RegisterState.EMPLOYEE, "Medewerker");
+
         particulierRegister.setOnAction(e -> {
             setRegisterState(RegisterState.USER);
             validate();
@@ -25,22 +28,27 @@ public class EmployeeDashboard extends EmployeeDashboardUI {
             validate();
         });
 
-        logout.setOnAction(e -> logout());
-
-        root.getChildren().addAll(particulierRegister, bedrijfRegister, gemachtigdeRegister, logout, 
+        dashboardPane.getChildren().addAll(particulierRegister, bedrijfRegister, gemachtigdeRegister, logout,
                 titleLabel, registerLabel, logoImageView, logoutImageView);
+
+        pageContainer.getChildren().add(dashboardPane);
+        root.getChildren().add(appContainer);
+    }
+
+    @Override
+    protected Image getCoverImage() {
+        return new Image("/images/background_covers/employee_dashboard.png");
+    }
+
+    @Override
+    protected String getPageTitle() {
+        return "DASHBOARD";
     }
 
     private void validate() {
-        GridPane validatePane = new GridPane();
+        Pane validatePane = new Pane();
         new ValidateScreen(validatePane);
         ScenesController.setStage(validatePane);
-    }
-
-    private void logout() {
-        GridPane loginPane = new GridPane();
-        new LoginScreen(loginPane);
-        ScenesController.setStage(loginPane);
     }
 
     private void setRegisterState(RegisterState registerState) {

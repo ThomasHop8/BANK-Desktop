@@ -12,6 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
+import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
 
 /**
@@ -19,6 +20,8 @@ import javafx.scene.text.Font;
  * @author kevin
  */
 public abstract class EmployeeDashboardUI extends BaseScreen {
+
+    public Pane dashboardPane;
     
     public Button particulierRegister, bedrijfRegister, gemachtigdeRegister, logout;
     public Label titleLabel, registerLabel;
@@ -27,6 +30,8 @@ public abstract class EmployeeDashboardUI extends BaseScreen {
     
     @Override
     protected void setupMainUI() {
+        dashboardPane = new Pane();
+
         particulierRegister = new Button("Particulier registeren");
         bedrijfRegister = new Button("Bedrijf registeren");
         gemachtigdeRegister = new Button("Gemachtigde registeren");

@@ -15,6 +15,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
+import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
 
 /**
@@ -22,6 +23,9 @@ import javafx.scene.text.Font;
  * @author kevin
  */
 public abstract class UserOverviewUI extends BaseScreen {
+
+    public Pane userOverviewPane;
+
     public Button logout, addRekening, transactions;
     public Label titleLabel, rekeningLabel, addRekeningLabel;
     public TableView<Rekening> tableRekeningen;
@@ -30,6 +34,7 @@ public abstract class UserOverviewUI extends BaseScreen {
     
     @Override
     protected void setupMainUI() {
+        userOverviewPane = new Pane();
         
         titleLabel = new Label("Welkom Klant123");
         titleLabel.setFont(Font.font(28));
