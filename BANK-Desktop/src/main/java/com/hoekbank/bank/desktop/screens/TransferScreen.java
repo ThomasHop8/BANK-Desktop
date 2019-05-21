@@ -5,9 +5,12 @@
  */
 package com.hoekbank.bank.desktop.screens;
 
-import com.hoekbank.bank.desktop.helpers.ScenesController;
 import com.hoekbank.bank.desktop.ui.TransferScreenUI;
-import javafx.scene.layout.BorderPane;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.scene.layout.Pane;
 
 /**
@@ -20,8 +23,17 @@ public class TransferScreen extends TransferScreenUI {
                 
         overboeken.setOnAction(e ->{
             String bedragString = invoerBedrag.getText();
-            float bedrag = Float.parseFloat(bedragString);
-            System.out.println(bedrag);
+            DecimalFormatSymbols symbols = new DecimalFormatSymbols();
+            symbols.setDecimalSeparator(',');
+            DecimalFormat format = new DecimalFormat("0.##");
+            format.setDecimalFormatSymbols(symbols);
+            try {
+                float f = format.parse(bedragString).floatValue();
+                System.out.println(f);
+            } catch (ParseException ex) {
+                Logger.getLogger(TransferScreen.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
         });
         
         annuleren.setOnAction(e ->{
