@@ -22,7 +22,7 @@ import javafx.scene.text.Font;
  * @author kevin
  */
 public abstract class UserOverviewUI extends BaseScreen {
-    public Button logout, addRekening, transactions;
+    public Button logout, addRekening, transactions, spaarrekening, betaalrekening, bankpas;
     public Label titleLabel, rekeningLabel, addRekeningLabel;
     public TableView<Rekening> tableRekeningen;
     public Image logoImage, logoutImage;
@@ -88,6 +88,12 @@ public abstract class UserOverviewUI extends BaseScreen {
         logout.setGraphic(logoutImageView);
         logout.setBackground(Background.EMPTY);
         
+        spaarrekening= new Button("spaarrekening");
+        betaalrekening = new Button("betaalrekening");
+        bankpas = new Button("bankpas");
+spaarrekening.setMinWidth(120);
+betaalrekening.setMinWidth(120);
+bankpas.setMinWidth(120);
         logoImage = new Image("/images/logo.png");
         logoImageView = new ImageView();
         logoImageView.setImage(logoImage);

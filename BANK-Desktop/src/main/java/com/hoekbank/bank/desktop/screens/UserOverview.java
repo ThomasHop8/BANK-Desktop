@@ -18,12 +18,19 @@ import com.sun.javafx.scene.control.skin.TableHeaderRow;
 import com.sun.jersey.core.util.MultivaluedMapImpl;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+import javafx.stage.Popup;
 
 import javax.ws.rs.core.MultivaluedMap;
 
@@ -32,20 +39,41 @@ import javax.ws.rs.core.MultivaluedMap;
  * @author kevin
  */
 public class UserOverview extends UserOverviewUI {
+  public GridPane rogier = new GridPane();
+
     public UserOverview(Pane root) {
-        
-        
-        tableRekeningen.setItems(getRekening());
+    tableRekeningen.setItems(getRekening());
+rogier.setPadding(new Insets(10, 10, 10, 10));
+rogier.setPrefSize(300, 300);
+rogier.setVgap(5);
+rogier.setHgap(5);
+spaarrekening.setText("Spaarrekening");
+rogier.add(spaarrekening, 80, 95);
+rogier.add(betaalrekening, 81, 95);
+rogier.add(bankpas, 82, 95);
+ 
         tableRekeningen.columnResizePolicyProperty();
         tableRekeningen.widthProperty().addListener((source, oldWidth, newWidth)->{
             TableHeaderRow header = (TableHeaderRow) tableRekeningen.lookup("TableHeaderRow");
             header.reorderingProperty().addListener((observable, oldValue, newValue)-> header.setReordering(false));
         });
+ 
+         addRekening.setOnAction(e ->{
+           
+root.getChildren().add(rogier);
+             
+         });
         
         
-        addRekening.setOnAction(e ->{
-            System.out.println("Je wordt doorverwezen naar de \"rekening toevoegen pagina\"");
-        });
+        
+        
+        
+        
+        
+        
+        
+        
+        
         
         transactions.setOnAction(e -> {
             String selectedRekNr = tableRekeningen.getSelectionModel().getSelectedItem().getRekeningnummer();
@@ -94,6 +122,8 @@ public class UserOverview extends UserOverviewUI {
         new LoginScreen(loginPane);
         ScenesController.setStage(loginPane);
     }
+    
+    
 }
 
         
