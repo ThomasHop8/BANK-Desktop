@@ -15,6 +15,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -34,7 +35,8 @@ public class ValidateScreen extends ValidateScreenUI {
 
     private RegisterState registerState;
 
-    public ValidateScreen(GridPane root) {
+    public ValidateScreen(Pane root) {
+        setupLogin(RegisterState.EMPLOYEE, "Medewerker");
         registerState = AppDataContainer.getInstance().getRegisterState();
 
         if(registerState == RegisterState.COMPANY) {
@@ -58,7 +60,7 @@ public class ValidateScreen extends ValidateScreenUI {
 //        String opmaak = "-fx-background-color: rgba(26, 159, 178, 1);";
 //        gridPaneLinks.setStyle(opmaak);
 
-        // Fonts, Colors
+        // Fonts, Colours
         lbTitle.setFont(Font.font("Arial", FontWeight.BOLD, 20));
         lbTitle.setTextFill(Color.BLACK);
 
@@ -123,8 +125,8 @@ public class ValidateScreen extends ValidateScreenUI {
          * add gridPaneLinks/gridRechts to root.
          */
 
-        root.add(gridPaneLinks, 0, 0);
-        root.add(gridRechts, 1, 0);
+        validateGridPane.add(gridPaneLinks, 0, 0);
+        validateGridPane.add(gridRechts, 1, 0);
 
         /**
          * Events
@@ -267,12 +269,22 @@ public class ValidateScreen extends ValidateScreenUI {
         });
 
 
-//        root.getChildren().addAll(gridControle);
+        pageContainer.getChildren().add(validateGridPane);
+        root.getChildren().add(appContainer);
+    }
 
+    @Override
+    protected Image getCoverImage() {
+        return new Image("/images/background_covers/validate.png");
+    }
+
+    @Override
+    protected String getPageTitle() {
+        return "VALIDEREN";
     }
 
     private void userValidated() {
-        GridPane registerPane = new GridPane();
+        Pane registerPane = new Pane();
         RegisterScreen registerScreen = new RegisterScreen(registerPane);
         registerScreen.userBSN = txtBsn.getText();
         ScenesController.setStage(registerPane);
@@ -304,7 +316,10 @@ public class ValidateScreen extends ValidateScreenUI {
         }
     }
 
-    private void back() {
+    @Override
+    protected void back() {
+        super.back();
+
         Pane employeePane = new Pane();
         new EmployeeDashboard(employeePane);
         ScenesController.setStage(employeePane);

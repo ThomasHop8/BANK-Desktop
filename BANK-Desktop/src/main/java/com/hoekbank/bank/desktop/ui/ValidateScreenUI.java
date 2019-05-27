@@ -2,8 +2,11 @@ package com.hoekbank.bank.desktop.ui;
 
 import com.hoekbank.bank.desktop.BaseScreen;
 import javafx.scene.control.*;
+import javafx.scene.layout.GridPane;
 
 public abstract class ValidateScreenUI extends BaseScreen {
+
+    public GridPane validateGridPane;
 
     public Button btnRegistreren, btnAfwijzen, btnTerug;
     public TextField txtBsn;
@@ -18,6 +21,7 @@ public abstract class ValidateScreenUI extends BaseScreen {
 
     @Override
     protected void setupMainUI() {
+        validateGridPane = new GridPane();
 
         // Buttons
         btnRegistreren = new Button("Registreren >");
