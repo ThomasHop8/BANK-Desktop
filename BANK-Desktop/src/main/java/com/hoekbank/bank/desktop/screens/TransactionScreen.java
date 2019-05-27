@@ -5,6 +5,9 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.hoekbank.bank.desktop.api.API;
 import com.hoekbank.bank.desktop.api.APIService;
+import com.hoekbank.bank.desktop.enums.RegisterState;
+import com.hoekbank.bank.desktop.helpers.AppDataContainer;
+import com.hoekbank.bank.desktop.helpers.ScenesController;
 import com.hoekbank.bank.desktop.models.Transactie;
 import com.hoekbank.bank.desktop.ui.TransactionScreenUI;
 import com.sun.javafx.scene.control.skin.TableHeaderRow;
@@ -18,10 +21,8 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
+import javafx.scene.image.Image;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
@@ -34,19 +35,24 @@ import javax.ws.rs.core.MultivaluedMap;
  */
 
 public class TransactionScreen extends TransactionScreenUI {
+
+    public String selectedRekNum;
+
     /**
      * Main pane van TransactieScreen
      * @param root
      */
-    public TransactionScreen(BorderPane root) {
+    public TransactionScreen(Pane root, String rekNr) {
+        setupLogin(RegisterState.USER, "Gebruiker");
+        this.selectedRekNum = rekNr;
+
         // GridPanes
         GridPane gridTop = new GridPane();
         GridPane gridCenter = new GridPane();
 
         // Borderpane settings, aangeven waar de panes komen te staan.
-        root.setTop(gridTop);
-        root.setCenter(gridCenter);
-        root.setStyle("-fx-background-color: #FFFF");
+        transactionBorderPane.setTop(gridTop);
+        transactionBorderPane.setCenter(gridCenter);
 
         // Style, Fonts
         lbTitel.setFont(Font.font("Arial", FontWeight.BOLD, 20));
@@ -129,6 +135,18 @@ public class TransactionScreen extends TransactionScreenUI {
 
         btnTerug.setOnAction( event -> back());
 
+        pageContainer.getChildren().add(transactionBorderPane);
+        root.getChildren().add(appContainer);
+    }
+
+    @Override
+    protected Image getCoverImage() {
+        return new Image("/images/background_covers/transactions.png");
+    }
+
+    @Override
+    protected String getPageTitle() {
+        return "TRANSACTIES";
     }
 
     // All transactions
@@ -145,17 +163,18 @@ public class TransactionScreen extends TransactionScreenUI {
 
     private JsonArray getTransactions() {
         MultivaluedMap<String, String> formData = new MultivaluedMapImpl();
-        formData.add("user", "1");
-        formData.add("accountNr", "0000000001");
+        formData.add("user", AppDataContainer.getInstance().getUserID());
+        formData.add("accountNr", selectedRekNum);
 
         return API.getInstance().post(APIService.ACCOUNT_TRANSACTIONS, formData).getAsJsonArray();
     }
 
-    private void back() {
-        System.out.println("Terug knop clicked!");
-        // todo wijzigen voor terug knop
-//        Pane employeePane = new Pane();
-//        new EmployeeDashboard(employeePane);
-//        ScenesController.setStage(employeePane);
+    @Override
+    protected void back() {
+        super.back();
+
+        Pane userOverview = new Pane();
+        new UserOverview(userOverview);
+        ScenesController.setStage(userOverview);
     }
 }
