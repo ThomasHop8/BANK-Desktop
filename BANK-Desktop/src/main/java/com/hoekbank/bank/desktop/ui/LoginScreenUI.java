@@ -7,10 +7,13 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
 
-public abstract class LoginScreenUI extends BaseScreen {
+public abstract class LoginScreenUI {
+
+    public GridPane loginGridPane;
 
     public Button loginButton;
     public TextField emailField;
@@ -18,9 +21,10 @@ public abstract class LoginScreenUI extends BaseScreen {
     public Label emailLabel, passwordLabel, titleLabel;
     public Image image;
     public ImageView imageView;
-    
-    @Override
+
     protected void setupMainUI() {
+        loginGridPane = new GridPane();
+
         loginButton = new Button("Login");
         emailField = new TextField();
         emailField.setPromptText("Voer uw e-mailadres in");

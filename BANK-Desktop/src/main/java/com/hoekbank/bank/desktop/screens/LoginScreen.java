@@ -4,8 +4,10 @@ import com.google.gson.JsonObject;
 import com.hoekbank.bank.desktop.api.API;
 import com.hoekbank.bank.desktop.api.APIService;
 import com.hoekbank.bank.desktop.helpers.AppDataContainer;
-import com.hoekbank.bank.desktop.helpers.Randompasswordgenerator;
 import com.hoekbank.bank.desktop.helpers.ScenesController;
+import com.hoekbank.bank.desktop.resources.HabboBackButton;
+import com.hoekbank.bank.desktop.resources.HabboButton;
+import com.hoekbank.bank.desktop.resources.HabboInput;
 import com.hoekbank.bank.desktop.ui.LoginScreenUI;
 import com.sun.jersey.core.util.MultivaluedMapImpl;
 import javafx.geometry.Pos;
@@ -13,15 +15,17 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 
 import javax.ws.rs.core.MultivaluedMap;
 
 public class LoginScreen extends LoginScreenUI {
 
-    public LoginScreen(GridPane root) {
-       
+    public LoginScreen(Pane root) {
+        setupMainUI();
+
+        HabboBackButton backButton = new HabboBackButton();
+
         loginButton.setOnAction(e->{
             if (emailField.getText().isEmpty() && passwordField.getText().isEmpty()){
                 showError("Geen gegevens ingevuld",
@@ -42,25 +46,28 @@ public class LoginScreen extends LoginScreenUI {
                 login();
             }
         });
-               
-     
-        root.setVgap(5);
-        root.setHgap(5);
-        
-        root.add(imageView, 0, 0);
-        root.add(titleLabel, 0, 1);
-        root.add(emailLabel, 0, 2);
-        root.add(emailField, 0, 3);
-        root.add(passwordLabel, 0, 4);
-        root.add(passwordField, 0, 5);
-        root.add(loginButton, 0, 6);
 
-        root.addEventHandler(KeyEvent.KEY_PRESSED, ev -> {
+        loginGridPane.setAlignment(Pos.CENTER);
+        loginGridPane.setVgap(5);
+        loginGridPane.setHgap(5);
+
+        loginGridPane.add(imageView, 0, 0);
+        loginGridPane.add(titleLabel, 0, 1);
+        loginGridPane.add(emailLabel, 0, 2);
+        loginGridPane.add(emailField, 0, 3);
+        loginGridPane.add(passwordLabel, 0, 4);
+        loginGridPane.add(passwordField, 0, 5);
+        loginGridPane.add(loginButton, 0, 6);
+
+        loginGridPane.addEventHandler(KeyEvent.KEY_PRESSED, ev -> {
             if (ev.getCode() == KeyCode.ENTER) {
                 loginButton.fire();
                 ev.consume();
             }
         });
+
+        root.getChildren().add(backButton);
+        root.getChildren().add(loginGridPane);
     }
 
     private void login() {

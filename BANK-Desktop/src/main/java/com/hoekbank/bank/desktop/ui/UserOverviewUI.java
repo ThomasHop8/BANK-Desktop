@@ -15,6 +15,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
+import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
 
 /**
@@ -22,7 +23,9 @@ import javafx.scene.text.Font;
  * @author kevin
  */
 public abstract class UserOverviewUI extends BaseScreen {
-    public Button logout, addRekening, transactions;
+    public Button logout, addRekening, transactions, spaarrekening, betaalrekening, bankpas;
+    public Pane userOverviewPane;
+
     public Label titleLabel, rekeningLabel, addRekeningLabel;
     public TableView<Rekening> tableRekeningen;
     public Image logoImage, logoutImage;
@@ -30,6 +33,7 @@ public abstract class UserOverviewUI extends BaseScreen {
     
     @Override
     protected void setupMainUI() {
+        userOverviewPane = new Pane();
         
         titleLabel = new Label("Welkom Klant123");
         titleLabel.setFont(Font.font(28));
@@ -88,6 +92,12 @@ public abstract class UserOverviewUI extends BaseScreen {
         logout.setGraphic(logoutImageView);
         logout.setBackground(Background.EMPTY);
         
+        spaarrekening= new Button("spaarrekening");
+        betaalrekening = new Button("betaalrekening");
+        bankpas = new Button("bankpas");
+spaarrekening.setMinWidth(120);
+betaalrekening.setMinWidth(120);
+bankpas.setMinWidth(120);
         logoImage = new Image("/images/logo.png");
         logoImageView = new ImageView();
         logoImageView.setImage(logoImage);

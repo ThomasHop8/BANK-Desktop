@@ -5,6 +5,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.hoekbank.bank.desktop.api.API;
 import com.hoekbank.bank.desktop.api.APIService;
+import com.hoekbank.bank.desktop.enums.RegisterState;
 import com.hoekbank.bank.desktop.helpers.AppDataContainer;
 import com.hoekbank.bank.desktop.helpers.ScenesController;
 import com.hoekbank.bank.desktop.models.Transactie;
@@ -20,6 +21,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
@@ -40,7 +42,8 @@ public class TransactionScreen extends TransactionScreenUI {
      * Main pane van TransactieScreen
      * @param root
      */
-    public TransactionScreen(BorderPane root, String rekNr) {
+    public TransactionScreen(Pane root, String rekNr) {
+        setupLogin(RegisterState.USER, "Gebruiker");
         this.selectedRekNum = rekNr;
 
         // GridPanes
@@ -48,9 +51,8 @@ public class TransactionScreen extends TransactionScreenUI {
         GridPane gridCenter = new GridPane();
 
         // Borderpane settings, aangeven waar de panes komen te staan.
-        root.setTop(gridTop);
-        root.setCenter(gridCenter);
-        root.setStyle("-fx-background-color: #FFFF");
+        transactionBorderPane.setTop(gridTop);
+        transactionBorderPane.setCenter(gridCenter);
 
         // Style, Fonts
         lbTitel.setFont(Font.font("Arial", FontWeight.BOLD, 20));
@@ -133,6 +135,18 @@ public class TransactionScreen extends TransactionScreenUI {
 
         btnTerug.setOnAction( event -> back());
 
+        pageContainer.getChildren().add(transactionBorderPane);
+        root.getChildren().add(appContainer);
+    }
+
+    @Override
+    protected Image getCoverImage() {
+        return new Image("/images/background_covers/transactions.png");
+    }
+
+    @Override
+    protected String getPageTitle() {
+        return "TRANSACTIES";
     }
 
     // All transactions
@@ -155,7 +169,10 @@ public class TransactionScreen extends TransactionScreenUI {
         return API.getInstance().post(APIService.ACCOUNT_TRANSACTIONS, formData).getAsJsonArray();
     }
 
-    private void back() {
+    @Override
+    protected void back() {
+        super.back();
+
         Pane userOverview = new Pane();
         new UserOverview(userOverview);
         ScenesController.setStage(userOverview);
