@@ -5,6 +5,8 @@ import com.hoekbank.bank.desktop.api.API;
 import com.hoekbank.bank.desktop.api.APIService;
 import com.hoekbank.bank.desktop.helpers.AppDataContainer;
 import com.hoekbank.bank.desktop.helpers.ScenesController;
+import com.hoekbank.bank.desktop.resources.HabboButton;
+import com.hoekbank.bank.desktop.resources.HabboInput;
 import com.hoekbank.bank.desktop.ui.LoginScreenUI;
 import com.sun.jersey.core.util.MultivaluedMapImpl;
 import javafx.geometry.Pos;
