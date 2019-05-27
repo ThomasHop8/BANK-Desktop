@@ -40,18 +40,19 @@ import javax.ws.rs.core.MultivaluedMap;
  * @author kevin
  */
 public class UserOverview extends UserOverviewUI {
-    public GridPane rogier = new GridPane();
-
+    
+    //Gridpane aangemaakt door Rogier, dit laat de opties om een spaarrekening,betaalrekening en bankpas aan te vragen.
+    public GridPane Grid = new GridPane();
     public UserOverview(Pane root) {
     tableRekeningen.setItems(getRekening());
-rogier.setPadding(new Insets(10, 10, 10, 10));
-rogier.setPrefSize(300, 300);
-rogier.setVgap(5);
-rogier.setHgap(5);
+Grid.setPadding(new Insets(10, 10, 10, 10));
+Grid.setPrefSize(300, 300);
+Grid.setVgap(5);
+Grid.setHgap(5);
 spaarrekening.setText("Spaarrekening");
-rogier.add(spaarrekening, 80, 95);
-rogier.add(betaalrekening, 81, 95);
-rogier.add(bankpas, 82, 95);
+Grid.add(spaarrekening, 80, 95);
+Grid.add(betaalrekening, 81, 95);
+Grid.add(bankpas, 82, 95);
  
         tableRekeningen.columnResizePolicyProperty();
         tableRekeningen.widthProperty().addListener((source, oldWidth, newWidth)->{
@@ -61,7 +62,7 @@ rogier.add(bankpas, 82, 95);
  
          addRekening.setOnAction(e ->{
            
-            root.getChildren().add(rogier);
+            root.getChildren().add(Grid);
              
          });
         

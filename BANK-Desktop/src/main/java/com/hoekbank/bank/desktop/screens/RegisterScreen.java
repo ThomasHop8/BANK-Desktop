@@ -19,7 +19,7 @@ import javafx.scene.layout.Pane;
 
 import javax.ws.rs.core.MultivaluedMap;
 import java.util.Optional;
-
+// dit scherm is gemaakt door Chris en Rogier
 public class RegisterScreen extends RegisterScreenUI {
 
     private RegisterState registerState;
@@ -28,7 +28,7 @@ public class RegisterScreen extends RegisterScreenUI {
     public RegisterScreen(Pane root) {
         setupLogin(RegisterState.EMPLOYEE, "Medewerker");
         registerState = AppDataContainer.getInstance().getRegisterState();
-
+// de volgende atributen komen in het scherm voor. 
         GridPane g = new GridPane();
         root.getChildren().addAll(registerButton, txtnaam, txtstraatnaam, txtwoonplaats, txttelefoon, txthuisnummer, txtemail, txtpostcode, lblnaam, lblstraatnaam, lblwoonplaats, lbltelefoon, lblhuisnummer, lblemail, lblpostcode);
         g.setHgap(1);
@@ -36,7 +36,7 @@ public class RegisterScreen extends RegisterScreenUI {
         
         if (registerState == RegisterState.COMPANY)
         	lblnaam.setText("Bedrijfsnaam");
-
+// als je op de knop drukt word er gecontroleerd of je alles juist hebt ingevoerd en word je vervolgens doorverwezen naar de volgende pagina.
         registerButton.setOnAction(event -> {
 
             if (txtnaam.getText().equals("")) {
