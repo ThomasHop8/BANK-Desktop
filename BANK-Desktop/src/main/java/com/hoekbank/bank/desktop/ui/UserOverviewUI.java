@@ -22,7 +22,7 @@ import javafx.scene.text.Font;
 
 /**
  *
- * @author kevin
+ * @author kevin en rogier
  */
 public abstract class UserOverviewUI extends BaseScreen {
     public Button logout, addRekening, transactions, spaarrekening, betaalrekening, bankpas;

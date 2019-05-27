@@ -32,7 +32,7 @@ import javax.ws.rs.core.MultivaluedMap;
 
 /**
  *
- * @author kevin
+ * @author kevin en rogier
  */
 
 public class UserOverview extends UserOverviewUI {
