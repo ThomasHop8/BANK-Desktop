@@ -4,8 +4,11 @@ import com.hoekbank.bank.desktop.BaseScreen;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
 
 public abstract class RegisterScreenUI extends BaseScreen {
+
+    public GridPane registerGridPane;
 
     public Button registerButton, terugButton;
     public TextField txtnaam,txtstraatnaam,txtwoonplaats, txttelefoon,txthuisnummer, txtemail,txtpostcode;
@@ -13,6 +16,8 @@ public abstract class RegisterScreenUI extends BaseScreen {
 
     @Override
     protected void setupMainUI() {
+        registerGridPane = new GridPane();
+
         registerButton = new Button("Registreren");
         txtnaam = new TextField ("");
         txtstraatnaam = new TextField ("");
