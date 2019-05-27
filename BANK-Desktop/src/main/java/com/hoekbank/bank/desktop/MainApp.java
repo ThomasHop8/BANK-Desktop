@@ -1,11 +1,17 @@
 package com.hoekbank.bank.desktop;
 
+import com.hoekbank.bank.desktop.api.API;
+import com.hoekbank.bank.desktop.api.APIService;
 import com.hoekbank.bank.desktop.helpers.ScenesController;
+import com.hoekbank.bank.desktop.models.User;
 import com.hoekbank.bank.desktop.screens.SplashScreen;
+import com.sun.jersey.core.util.MultivaluedMapImpl;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+
+import javax.ws.rs.core.MultivaluedMap;
 
 public class MainApp extends Application {
 
