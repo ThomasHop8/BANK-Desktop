@@ -5,11 +5,13 @@ import com.hoekbank.bank.desktop.api.API;
 import com.hoekbank.bank.desktop.api.APIService;
 import com.hoekbank.bank.desktop.enums.RegisterState;
 import com.hoekbank.bank.desktop.helpers.AppDataContainer;
+import com.hoekbank.bank.desktop.helpers.Randompasswordgenerator;
 import com.hoekbank.bank.desktop.helpers.ScenesController;
 import com.hoekbank.bank.desktop.models.User;
 import com.hoekbank.bank.desktop.ui.RegisterScreenUI;
 import com.sun.jersey.core.util.MultivaluedMapImpl;
 import javafx.scene.control.ButtonType;
+import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -23,7 +25,8 @@ public class RegisterScreen extends RegisterScreenUI {
     private RegisterState registerState;
     public String userBSN;
 
-    public RegisterScreen(GridPane root) {
+    public RegisterScreen(Pane root) {
+        setupLogin(RegisterState.EMPLOYEE, "Medewerker");
         registerState = AppDataContainer.getInstance().getRegisterState();
 
         GridPane g = new GridPane();
@@ -136,12 +139,6 @@ public class RegisterScreen extends RegisterScreenUI {
             }
             
             else {
-                Alert alert = new Alert(AlertType.CONFIRMATION);
-                alert.setTitle("Goed gedaan");
-                alert.setHeaderText("Lekker bezig pik!");
-                alert.setContentText("Registratie is voltooid!");
-                alert.showAndWait();
-
                 registerUser();
             }
             if (registerState == RegisterState.REPRESENTATIVE) {
@@ -153,11 +150,7 @@ public class RegisterScreen extends RegisterScreenUI {
 
         });
 
-        terugButton.setOnAction(event -> {
-            GridPane validatePane = new GridPane();
-            new ValidateScreen(validatePane);
-            ScenesController.setStage(validatePane);
-        });
+        terugButton.setOnAction(event -> back());
 
         g.add(lblnaam, 450, 200);
         g.add(txtnaam, 450, 201);
@@ -176,8 +169,29 @@ public class RegisterScreen extends RegisterScreenUI {
         g.add(terugButton, 0, 8);
         g.add(registerButton, 451, 207);
 
-        root.getChildren().add(g);
+        registerGridPane.getChildren().add(g);
 
+        pageContainer.getChildren().add(registerGridPane);
+        root.getChildren().add(appContainer);
+    }
+
+    @Override
+    protected Image getCoverImage() {
+        return new Image("/images/background_covers/registration.png");
+    }
+
+    @Override
+    protected String getPageTitle() {
+        return "REGISTREREN";
+    }
+
+    @Override
+    protected void back() {
+        super.back();
+
+        GridPane validatePane = new GridPane();
+        new ValidateScreen(validatePane);
+        ScenesController.setStage(validatePane);
     }
 
     public void registerUser() {
@@ -186,7 +200,7 @@ public class RegisterScreen extends RegisterScreenUI {
         user.setEmail(txtemail.getText());
         user.setBsn(userBSN);
         user.setHuisnummer(txthuisnummer.getText());
-        user.setPassword("123");
+        user.setPassword(Randompasswordgenerator.generatePassword(10));
         user.setPostcode(txtpostcode.getText());
         user.setStraatnaam(txtstraatnaam.getText());
         user.setTelefoonnummer(txttelefoon.getText());
@@ -195,7 +209,7 @@ public class RegisterScreen extends RegisterScreenUI {
         MultivaluedMap<String, String> formData = new MultivaluedMapImpl();
         formData.add("user", user.serialize());
 
-        JsonObject apiResponse = API.getInstance().post(APIService.USER_CREATE, formData);
+        JsonObject apiResponse = API.getInstance().post(APIService.USER_CREATE, formData).getAsJsonObject();
 
         if(apiResponse.get("success") != null) {
             Alert alert = new Alert(AlertType.INFORMATION);
@@ -205,7 +219,7 @@ public class RegisterScreen extends RegisterScreenUI {
             Optional<ButtonType> result = alert.showAndWait();
             ButtonType button = result.orElse(ButtonType.CANCEL);
             if (button == ButtonType.OK) {
-                GridPane dashboardPane = new GridPane();
+                Pane dashboardPane = new Pane();
                 new EmployeeDashboard(dashboardPane);
                 ScenesController.setStage(dashboardPane);
             }
