@@ -1,18 +1,28 @@
 package com.hoekbank.bank.desktop.screens;
 
+import com.google.gson.JsonObject;
+import com.hoekbank.bank.desktop.api.API;
+import com.hoekbank.bank.desktop.api.APIService;
+import com.hoekbank.bank.desktop.enums.RegisterState;
+import com.hoekbank.bank.desktop.helpers.AppDataContainer;
 import com.hoekbank.bank.desktop.helpers.ScenesController;
 import com.hoekbank.bank.desktop.ui.ValidateScreenUI;
+import com.sun.jersey.core.util.MultivaluedMapImpl;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
+import javax.ws.rs.core.MultivaluedMap;
 import java.sql.SQLOutput;
 import java.util.Optional;
 
@@ -23,8 +33,17 @@ import java.util.Optional;
 
 public class ValidateScreen extends ValidateScreenUI {
 
+    private RegisterState registerState;
 
-    public ValidateScreen(GridPane root) {
+    public ValidateScreen(Pane root) {
+        setupLogin(RegisterState.EMPLOYEE, "Medewerker");
+        registerState = AppDataContainer.getInstance().getRegisterState();
+
+        if(registerState == RegisterState.COMPANY) {
+            lbTitle.setText("Bedrijf Controleren");
+            lbBsn.setText("KvK");
+        }
+
         /**
          * GridPane links, Controle
          */
@@ -41,9 +60,18 @@ public class ValidateScreen extends ValidateScreenUI {
 //        String opmaak = "-fx-background-color: rgba(26, 159, 178, 1);";
 //        gridPaneLinks.setStyle(opmaak);
 
-        // Fonts, Colors
+        // Fonts, Colours
         lbTitle.setFont(Font.font("Arial", FontWeight.BOLD, 20));
         lbTitle.setTextFill(Color.BLACK);
+
+
+        // Numbers only
+        txtBsn.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("\\d*")) {
+                txtBsn.setText(newValue.replaceAll("[^\\d]", ""));
+            }
+        });
+
 
         /**
          * Add UI on GridPane links
@@ -97,8 +125,8 @@ public class ValidateScreen extends ValidateScreenUI {
          * add gridPaneLinks/gridRechts to root.
          */
 
-        root.add(gridPaneLinks, 0, 0);
-        root.add(gridRechts, 1, 0);
+        validateGridPane.add(gridPaneLinks, 0, 0);
+        validateGridPane.add(gridRechts, 1, 0);
 
         /**
          * Events
@@ -241,22 +269,57 @@ public class ValidateScreen extends ValidateScreenUI {
         });
 
 
-//        root.getChildren().addAll(gridControle);
+        pageContainer.getChildren().add(validateGridPane);
+        root.getChildren().add(appContainer);
+    }
 
+    @Override
+    protected Image getCoverImage() {
+        return new Image("/images/background_covers/validate.png");
+    }
+
+    @Override
+    protected String getPageTitle() {
+        return "VALIDEREN";
     }
 
     private void userValidated() {
-        GridPane registerPane = new GridPane();
+        Pane registerPane = new Pane();
         RegisterScreen registerScreen = new RegisterScreen(registerPane);
         registerScreen.userBSN = txtBsn.getText();
         ScenesController.setStage(registerPane);
     }
 
     private void denyUser() {
+        MultivaluedMap<String, String> formData = new MultivaluedMapImpl();
+        formData.add("idnum", txtBsn.getText());
+        formData.add("reason", txtRedenAfwijzing.getText());
 
+        JsonObject apiResponse = API.getInstance().post(APIService.USER_REJECT, formData).getAsJsonObject();
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+
+        if(apiResponse.get("error").getAsBoolean()) {
+            alert.setAlertType(Alert.AlertType.INFORMATION);
+            alert.setHeaderText("Afwijzing Succesvol!");
+            alert.setContentText("De gebruiker met identiciatiecode " +  txtBsn.getText() + " is succesvol afgewezen!");
+
+            Optional<ButtonType> result = alert.showAndWait();
+            ButtonType button = result.orElse(ButtonType.CANCEL);
+            if (button == ButtonType.OK) {
+                back();
+            }
+        } else {
+            alert.setAlertType(Alert.AlertType.ERROR);
+            alert.setHeaderText("Afwijzing Mislukt");
+            alert.setContentText("De gebruiker met identiciatiecode " +  txtBsn.getText() + " is al afgewezen!");
+            alert.showAndWait();
+        }
     }
 
-    private void back() {
+    @Override
+    protected void back() {
+        super.back();
+
         Pane employeePane = new Pane();
         new EmployeeDashboard(employeePane);
         ScenesController.setStage(employeePane);

@@ -5,8 +5,10 @@ import com.hoekbank.bank.desktop.ui.SplashScreenUI;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
+import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.GridPane;
 import javafx.util.Duration;
 
 public class SplashScreen extends SplashScreenUI {
@@ -14,18 +16,25 @@ public class SplashScreen extends SplashScreenUI {
     private Timeline fade;
 
     public SplashScreen(Pane root) {
+        setupMainUI();
         setupLogic();
+
+
+        Button button = new Button("Test123");
+        button.getStylesheets().add(getClass().getResource("/styles/Styles.css").toString());
+        button.getStyleClass().addAll("green-button");
+        button.setMinWidth(220);
+        button.setMaxWidth(220);
 
         System.out.println(System.getProperty("os.name") + " " + System.getProperty("os.arch"));
 
         fade.playFromStart();
         fade.setOnFinished(event -> {
-            GridPane loginPane = new GridPane();
+            Pane loginPane = new Pane();
             new LoginScreen(loginPane);
             ScenesController.setStage(loginPane);
         });
 
-        root.setStyle("-fx-background-color: #000");
         root.getChildren().addAll(container);
     }
 

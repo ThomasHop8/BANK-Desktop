@@ -16,10 +16,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
+import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
 
 
@@ -28,8 +25,10 @@ import javafx.scene.text.Font;
  * @author kevin
  */
 public abstract class UserOverviewUI extends BaseScreen {
-    public Button logout, addRekening, transactions, spaarrekening, betaalrekening;
-    public Label titleLabel, rekeningLabel, addRekeningLabel,popup;
+    public Button logout, addRekening, transactions, spaarrekening, betaalrekening, bankpas;
+    public Pane userOverviewPane;
+
+    public Label titleLabel, rekeningLabel, addRekeningLabel;
     public TableView<Rekening> tableRekeningen;
     public Image logoImage, logoutImage;
     public ImageView logoImageView, logoutImageView;
@@ -37,10 +36,7 @@ public abstract class UserOverviewUI extends BaseScreen {
     
     @Override
     protected void setupMainUI() {
-        popup = new Label();
-
-        popup.relocate(200, 200);
-        
+        userOverviewPane = new Pane();
         
         titleLabel = new Label("Welkom Klant123");
         titleLabel.setFont(Font.font(28));
@@ -109,6 +105,12 @@ public abstract class UserOverviewUI extends BaseScreen {
      	
 		
         
+        spaarrekening= new Button("spaarrekening");
+        betaalrekening = new Button("betaalrekening");
+        bankpas = new Button("bankpas");
+spaarrekening.setMinWidth(120);
+betaalrekening.setMinWidth(120);
+bankpas.setMinWidth(120);
         logoImage = new Image("/images/logo.png");
         logoImageView = new ImageView();
         logoImageView.setImage(logoImage);
