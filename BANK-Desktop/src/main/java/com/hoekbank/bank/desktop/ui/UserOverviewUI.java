@@ -99,12 +99,9 @@ public abstract class UserOverviewUI extends BaseScreen {
         betaalrekening = new Button("Betaalrekening");
         betaalrekening.setFont(Font.font ("Verdana", 20));
         
-         spaarrekening.setBackground(new Background(new BackgroundFill(Color.rgb(255,255,255), CornerRadii.EMPTY, Insets.EMPTY)));
-         betaalrekening.setBackground(new Background(new BackgroundFill(Color.rgb(255,255,255), CornerRadii.EMPTY, Insets.EMPTY)));
-      
-     	
-		
         
+		
+        // Dit is gemaakt door rogier
         spaarrekening= new Button("spaarrekening");
         betaalrekening = new Button("betaalrekening");
         bankpas = new Button("bankpas");

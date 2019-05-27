@@ -36,31 +36,22 @@ import javax.ws.rs.core.MultivaluedMap;
  */
 
 public class UserOverview extends UserOverviewUI {
-    public GridPane rogier = new GridPane();
+    public GridPane grid = new GridPane();
 
     public UserOverview(Pane root) {
     tableRekeningen.setItems(getRekening());
-rogier.setPadding(new Insets(10, 10, 10, 10));
-rogier.setPrefSize(300, 300);
-rogier.setVgap(5);
-rogier.setHgap(5);
+grid.setPadding(new Insets(10, 10, 10, 10));
+grid.setPrefSize(300, 300);
+grid.setVgap(5);
+grid.setHgap(5);
 spaarrekening.setText("Spaarrekening");
-rogier.add(spaarrekening, 80, 95);
-rogier.add(betaalrekening, 81, 95);
-rogier.add(bankpas, 82, 95);
+grid.add(spaarrekening, 80, 95);
+grid.add(betaalrekening, 81, 95);
+grid.add(bankpas, 82, 95);
  
         tableRekeningen.columnResizePolicyProperty();
 
-        ContextMenu contextMenu = new ContextMenu();
-        MenuItem spaarrekening1 = new MenuItem("Spaarrekening");
-        MenuItem betaalrekening1 = new MenuItem("Betaalrekening");
-
-        spaarrekening1.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                System.out.println("SpaarrekeningXDXD");
-            }
-        });
+     
             
         tableRekeningen.widthProperty().addListener((source, oldWidth, newWidth)->{
             TableHeaderRow header = (TableHeaderRow) tableRekeningen.lookup("TableHeaderRow");
@@ -69,7 +60,7 @@ rogier.add(bankpas, 82, 95);
  
          addRekening.setOnAction(e ->{
            
-            root.getChildren().add(rogier);
+            root.getChildren().add(grid);
              
          });
         
