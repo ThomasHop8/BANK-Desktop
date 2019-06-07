@@ -13,6 +13,14 @@ import javafx.scene.layout.*;
 public class HabboBackButton extends Button {
 
     public HabboBackButton() {
+        setButtonStyle();
+    }
+
+    public HabboBackButton(String title) {
+        setButtonStyle();
+    }
+
+    private void setButtonStyle() {
         BackgroundImage backgroundImage = new BackgroundImage( new Image( getClass().getResource("/images/back_button.png").toExternalForm()), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
         Background background = new Background(backgroundImage);
 

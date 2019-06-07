@@ -54,7 +54,7 @@ public class ValidateScreen extends ValidateScreenUI {
         // gridpane settings
         gridPaneLinks.setMinSize(640, 691);
 //        gridPaneLinks.setMaxSize(640,700);
-        gridPaneLinks.setAlignment(Pos.CENTER);
+        gridPaneLinks.setAlignment(Pos.TOP_CENTER);
         gridPaneLinks.setVgap(10);
         gridPaneLinks.setHgap(10);
         gridPaneLinks.setPadding(new Insets(10));

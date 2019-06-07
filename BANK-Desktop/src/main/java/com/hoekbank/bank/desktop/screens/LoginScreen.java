@@ -24,8 +24,6 @@ public class LoginScreen extends LoginScreenUI {
     public LoginScreen(Pane root) {
         setupMainUI();
 
-        HabboBackButton backButton = new HabboBackButton();
-
         loginButton.setOnAction(e->{
             if (emailField.getText().isEmpty() && passwordField.getText().isEmpty()){
                 showError("Geen gegevens ingevuld",
@@ -66,7 +64,6 @@ public class LoginScreen extends LoginScreenUI {
             }
         });
 
-        root.getChildren().add(backButton);
         root.getChildren().add(loginGridPane);
     }
 

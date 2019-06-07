@@ -5,6 +5,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.hoekbank.bank.desktop.api.API;
 import com.hoekbank.bank.desktop.api.APIService;
+import com.hoekbank.bank.desktop.enums.RegisterState;
 import com.hoekbank.bank.desktop.helpers.AppDataContainer;
 import com.hoekbank.bank.desktop.helpers.ScenesController;
 import com.hoekbank.bank.desktop.models.Rekening;
@@ -28,6 +29,8 @@ public class UserOverview extends UserOverviewUI {
     public GridPane grid = new GridPane();
 
     public UserOverview(Pane root) {
+        setupLogin(RegisterState.USER, "Gebruiker");
+
         tableRekeningen.setItems(getRekening());
         grid.setPadding(new Insets(10, 10, 10, 10));
         grid.setPrefSize(300, 300);
@@ -60,7 +63,7 @@ public class UserOverview extends UserOverviewUI {
             ScenesController.setStage(transPane);
         });
 
-        userOverviewPane.getChildren().addAll(logout, addRekening, transactions, titleLabel, rekeningLabel, addRekeningLabel, tableRekeningen, logoImageView, logoutImageView);
+        userOverviewPane.getChildren().addAll(addRekening, transactions, titleLabel, rekeningLabel, addRekeningLabel, tableRekeningen, logoImageView);
 
         pageContainer.getChildren().add(userOverviewPane);
         root.getChildren().add(appContainer);

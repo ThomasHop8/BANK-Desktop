@@ -1,6 +1,8 @@
 package com.hoekbank.bank.desktop.ui;
 
 import com.hoekbank.bank.desktop.BaseScreen;
+import com.hoekbank.bank.desktop.resources.HabboBackButton;
+import com.hoekbank.bank.desktop.resources.HabboButton;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 
@@ -27,9 +29,9 @@ public abstract class ValidateScreenUI extends BaseScreen {
         validateGridPane = new GridPane();
 
         // Buttons
-        btnRegistreren = new Button("Registreren >");
-        btnAfwijzen = new Button("Afwijzen");
-        btnTerug = new Button("< Terug");
+        btnRegistreren = new HabboButton("Registreren >");
+        btnAfwijzen = new HabboButton("Afwijzen");
+        btnTerug = new HabboBackButton("< Terug");
         // TextFields
         txtBsn = new TextField();
         txtBsn.setPromptText("123456789");

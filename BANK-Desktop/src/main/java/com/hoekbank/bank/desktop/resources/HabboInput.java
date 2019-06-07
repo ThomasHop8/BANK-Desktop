@@ -14,4 +14,11 @@ public class HabboInput extends TextField {
         this.getStylesheets().add("/styles/Styles.css");
         this.getStyleClass().add("grey-input");
     }
+
+    public HabboInput(String title) {
+        this.getStylesheets().add("/styles/Styles.css");
+        this.getStyleClass().add("grey-input");
+
+        this.setText(title);
+    }
 }

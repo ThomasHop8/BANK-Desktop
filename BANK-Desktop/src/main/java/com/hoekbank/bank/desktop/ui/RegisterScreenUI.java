@@ -6,6 +6,9 @@
 package com.hoekbank.bank.desktop.ui;
 
 import com.hoekbank.bank.desktop.BaseScreen;
+import com.hoekbank.bank.desktop.resources.HabboBackButton;
+import com.hoekbank.bank.desktop.resources.HabboButton;
+import com.hoekbank.bank.desktop.resources.HabboInput;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -24,8 +27,8 @@ public abstract class RegisterScreenUI extends BaseScreen {
     protected void setupMainUI() {
         registerGridPane = new GridPane();
 
-        registerButton = new Button("Registreren");
-        txtnaam = new TextField ("");
+        registerButton = new HabboButton("Registreren");
+        txtnaam = new HabboInput("");
         txtstraatnaam = new TextField ("");
         txtwoonplaats = new TextField ("");
         txttelefoon = new TextField ("");
@@ -39,7 +42,7 @@ public abstract class RegisterScreenUI extends BaseScreen {
         lblhuisnummer = new Label ("Huisnummer");
         lblemail = new Label ("Email adres");
         lblpostcode = new Label ("Postcode");
-        terugButton = new Button ("Terug");
+        terugButton = new HabboBackButton("Terug");
       
     }
 }

@@ -28,8 +28,8 @@ public class EmployeeDashboard extends EmployeeDashboardUI {
             validate();
         });
 
-        dashboardPane.getChildren().addAll(particulierRegister, bedrijfRegister, gemachtigdeRegister, logout,
-                titleLabel, registerLabel, logoImageView, logoutImageView);
+        dashboardPane.getChildren().addAll(particulierRegister, bedrijfRegister, gemachtigdeRegister,
+                titleLabel, registerLabel, logoImageView);
 
         pageContainer.getChildren().add(dashboardPane);
         root.getChildren().add(appContainer);

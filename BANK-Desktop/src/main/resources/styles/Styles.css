@@ -1,7 +1,7 @@
 .green-button {
     -fx-background-color:
-            linear-gradient(#686868 0%, #232723 25%, #373837 75%, #757575 100%),
-            linear-gradient(#020b02, #3a3a3a),
+            linear-gradient(#020b02 0%, #020b02 25%, #020b02 75%, #020b02 100%),
+            linear-gradient(#020b02, #020b02),
             linear-gradient(#009400 0%, #009400 20%, #009400 80%, #009400 100%),
             linear-gradient(#009400 0%, #009400 20%, #009400 80%, #009400 100%),
             linear-gradient(#00A200 0%, #00A200 50%, #009400 51%, #009400 100%);
@@ -11,7 +11,7 @@
     -fx-font-family: "Ubuntu";
     -fx-font-size: 14px;
     -fx-text-fill: white;
-    -fx-effect: dropshadow( three-pass-box , rgb(255,255,255) , 1, 0.0 , 0 , 1);
+    -fx-effect: dropshadow( three-pass-box , rgb(0,0,0) , 1, 0.0 , 0 , 1);
 }
 .green-button Text {
     -fx-effect: dropshadow( one-pass-box , black , 0, 0.0 , 0 , -1 );
@@ -20,8 +20,8 @@
 
 .grey-input {
     -fx-background-color:
-            linear-gradient(#686868 0%, #232723 25%, #373837 75%, #757575 100%),
-            linear-gradient(#020b02, #3a3a3a),
+            linear-gradient(#020b02 0%, #020b02 25%, #020b02 75%, #020b02 100%),
+            linear-gradient(#020b02, #020b02),
             linear-gradient(#C5D4DC 0%, #C5D4DC 20%, #C5D4DC 80%, #C5D4DC 100%),
             linear-gradient(#C5D4DC 0%, #C5D4DC 20%, #C5D4DC 80%, #C5D4DC 100%),
             linear-gradient(#C5D4DC 0%, #C5D4DC 50%, #C5D4DC 51%, #C5D4DC 100%);
@@ -31,5 +31,5 @@
     -fx-font-family: "Ubuntu";
     -fx-text-fill: #85969C;
     -fx-font-size: 14px;
-    -fx-effect: dropshadow( three-pass-box , rgb(255,255,255) , 1, 0.0 , 0 , 1);
+    -fx-effect: dropshadow( three-pass-box , rgb(0,0,0) , 1, 0.0 , 0 , 1);
 }
