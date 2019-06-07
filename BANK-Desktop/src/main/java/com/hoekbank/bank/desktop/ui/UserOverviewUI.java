@@ -7,6 +7,7 @@ package com.hoekbank.bank.desktop.ui;
 
 import com.hoekbank.bank.desktop.BaseScreen;
 import com.hoekbank.bank.desktop.models.Rekening;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -18,9 +19,10 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
 
+
 /**
  *
- * @author kevin
+ * @author kevin en rogier
  */
 public abstract class UserOverviewUI extends BaseScreen {
     public Button logout, addRekening, transactions, spaarrekening, betaalrekening, bankpas;
@@ -30,6 +32,7 @@ public abstract class UserOverviewUI extends BaseScreen {
     public TableView<Rekening> tableRekeningen;
     public Image logoImage, logoutImage;
     public ImageView logoImageView, logoutImageView;
+ 
     
     @Override
     protected void setupMainUI() {
@@ -91,7 +94,14 @@ public abstract class UserOverviewUI extends BaseScreen {
         logoutImageView.setFitWidth(136);
         logout.setGraphic(logoutImageView);
         logout.setBackground(Background.EMPTY);
+        spaarrekening = new Button("Spaarrekening");
+        spaarrekening.setFont(Font.font ("Verdana", 20));
+        betaalrekening = new Button("Betaalrekening");
+        betaalrekening.setFont(Font.font ("Verdana", 20));
         
+        
+		
+        // Dit is gemaakt door rogier
         spaarrekening= new Button("spaarrekening");
         betaalrekening = new Button("betaalrekening");
         bankpas = new Button("bankpas");
