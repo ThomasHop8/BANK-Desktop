@@ -7,6 +7,7 @@ package com.hoekbank.bank.desktop.ui;
 
 import com.hoekbank.bank.desktop.BaseScreen;
 
+import com.hoekbank.bank.desktop.resources.HabboButton;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -32,9 +33,16 @@ public abstract class EmployeeDashboardUI extends BaseScreen {
     protected void setupMainUI() {
         dashboardPane = new Pane();
 
-        particulierRegister = new Button("Particulier registeren");
-        bedrijfRegister = new Button("Bedrijf registeren");
-        gemachtigdeRegister = new Button("Gemachtigde registeren");
+        particulierRegister = new HabboButton("Nieuwe Particulier registeren");
+        bedrijfRegister = new HabboButton("Nieuw Bedrijf registeren");
+        gemachtigdeRegister = new HabboButton("Nieuwe Gemachtigde registeren");
+
+        particulierRegister.setMinWidth(180);
+        particulierRegister.setMinHeight(120);
+        bedrijfRegister.setMinWidth(180);
+        bedrijfRegister.setMinHeight(120);
+        gemachtigdeRegister.setMinWidth(180);
+        gemachtigdeRegister.setMinHeight(120);
         
         titleLabel = new Label("Welkom Medewerker123");
         titleLabel.setFont(Font.font(28));
@@ -65,7 +73,7 @@ public abstract class EmployeeDashboardUI extends BaseScreen {
         logout.relocate(1104, 40);
         registerLabel.relocate(170, 128);
         particulierRegister.relocate(170, 165);
-        bedrijfRegister.relocate(360, 165);
-        gemachtigdeRegister.relocate(550, 165);
+        bedrijfRegister.relocate(400, 165);
+        gemachtigdeRegister.relocate(630, 165);
     }
 }

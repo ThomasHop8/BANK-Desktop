@@ -1,6 +1,7 @@
 package com.hoekbank.bank.desktop.ui;
 
 import com.hoekbank.bank.desktop.BaseScreen;
+import com.hoekbank.bank.desktop.resources.HabboButton;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -25,7 +26,7 @@ public abstract class LoginScreenUI {
     protected void setupMainUI() {
         loginGridPane = new GridPane();
 
-        loginButton = new Button("Login");
+        loginButton = new HabboButton("Login");
         emailField = new TextField();
         emailField.setPromptText("Voer uw e-mailadres in");
         passwordField = new PasswordField();

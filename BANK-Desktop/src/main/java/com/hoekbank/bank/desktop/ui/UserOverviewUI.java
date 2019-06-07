@@ -7,6 +7,7 @@ package com.hoekbank.bank.desktop.ui;
 
 import com.hoekbank.bank.desktop.BaseScreen;
 import com.hoekbank.bank.desktop.models.Rekening;
+import com.hoekbank.bank.desktop.resources.HabboButton;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -48,7 +49,7 @@ public abstract class UserOverviewUI extends BaseScreen {
         addRekening = new Button("+");
         addRekening.setFont(Font.font(18));
         
-        transactions = new Button("Bekijk transacties");
+        transactions = new HabboButton("Bekijk transacties");
         transactions.setFont(Font.font(16));
         
         tableRekeningen = new TableView<>();

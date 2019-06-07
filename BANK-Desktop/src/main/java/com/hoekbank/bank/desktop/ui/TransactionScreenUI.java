@@ -2,6 +2,7 @@ package com.hoekbank.bank.desktop.ui;
 
 import com.hoekbank.bank.desktop.BaseScreen;
 import com.hoekbank.bank.desktop.models.Transactie;
+import com.hoekbank.bank.desktop.resources.HabboBackButton;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
@@ -23,7 +24,7 @@ public abstract class TransactionScreenUI extends BaseScreen {
         transactionBorderPane = new BorderPane();
 
         // Knoppen
-        btnTerug = new Button("< Terug");
+        btnTerug = new HabboBackButton("< Terug");
         // Labels
         lbTitel = new Label("Transacties");
         lbSaldo = new Label("Saldo");
