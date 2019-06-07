@@ -7,7 +7,12 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.BorderPane;
 
-
+/**
+ * TransactionScreenUI
+ * V1.0
+ * @author Chahine
+ * Last edit 27 mei 2019
+ */
 public abstract class TransactionScreenUI extends BaseScreen {
 
     public BorderPane transactionBorderPane;

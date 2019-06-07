@@ -1,5 +1,11 @@
 package com.hoekbank.bank.desktop.models;
 
+/**
+ * Transactie
+ * V1.0
+ * @author Chahine
+ * Last edit 27 mei 2019
+ */
 public class Transactie {
     private String datum, omschrijving;
     private double bedragIn, bedragUit, saldo;

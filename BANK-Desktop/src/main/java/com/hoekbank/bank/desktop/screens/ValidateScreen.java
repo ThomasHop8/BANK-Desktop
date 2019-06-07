@@ -28,7 +28,10 @@ import java.util.Optional;
 
 
 /**
+ * ValidateScreen UI
+ * v1.0
  * @author Chahine
+ * Last edit 15 mei 2019
  */
 
 public class ValidateScreen extends ValidateScreenUI {

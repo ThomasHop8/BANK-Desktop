@@ -16,7 +16,10 @@ public abstract class ValidateScreenUI extends BaseScreen {
     public Alert alertAfwijsWarning, alertAfwijsBevestigen, alertBtnRegisterBevestigen, alertBtnRegisterWarning;
 
     /**
+     * ValidateScreenUI
+     * v1.0
      * @author Chahine
+     * Last edit 15 mei 2019
      */
 
     @Override
