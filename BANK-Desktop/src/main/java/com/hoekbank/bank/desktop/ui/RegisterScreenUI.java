@@ -1,3 +1,8 @@
+/*
+ * 
+ * Auteur: Chris Gerlach & Rogier Rijsdijk
+ */
+
 package com.hoekbank.bank.desktop.ui;
 
 import com.hoekbank.bank.desktop.BaseScreen;
@@ -8,7 +13,8 @@ import javafx.scene.layout.GridPane;
 
 public abstract class RegisterScreenUI extends BaseScreen {
 
-    public GridPane registerGridPane;
+    //In deze Class worden de UI-eenheden van RegisterScreen aangemaakt
+	public GridPane registerGridPane;
 
     public Button registerButton, terugButton;
     public TextField txtnaam,txtstraatnaam,txtwoonplaats, txttelefoon,txthuisnummer, txtemail,txtpostcode;
