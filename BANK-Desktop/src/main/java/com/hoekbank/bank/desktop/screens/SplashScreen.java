@@ -6,11 +6,15 @@ import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 
+/**
+ * SplashScreen
+ * v2.1
+ *
+ * Created by Thomas Hopstaken on 04-01-2019
+ **/
 public class SplashScreen extends SplashScreenUI {
 
     private Timeline fade;
@@ -38,6 +42,9 @@ public class SplashScreen extends SplashScreenUI {
         root.getChildren().addAll(container);
     }
 
+    /**
+     * Private method to setup and handle the fade animation
+     */
     private void setupLogic() {
         fade = new Timeline(
                 new KeyFrame(Duration.ZERO, new KeyValue(container.opacityProperty(), 0)),

@@ -59,12 +59,28 @@ public abstract class BaseScreen {
         setupMainUI();
     }
 
+    /**
+     * Method for setting the main UI
+     */
     protected abstract void setupMainUI();
 
+    /**
+     * Method for setting right cover image
+     * @return Image right cover image
+     */
     protected abstract Image getCoverImage();
 
+    /**
+     * Method for setting the current page title
+     * @return String current page title
+     */
     protected abstract String getPageTitle();
 
+    /**
+     * Method for setting the login badge in the top right corner
+     * @param state RegisterState of the current user
+     * @param user String name of the current user
+     */
     protected void setupLogin(RegisterState state, String user) {
         ImageView loginImageView = new ImageView();
         Text userText = new Text(user);
@@ -87,6 +103,9 @@ public abstract class BaseScreen {
         topBar.getChildren().addAll(loginImageView, userText);
     }
 
+    /**
+     * Method for overriding the back procedure
+     */
     protected void back() {
         ArrayList<String> pages = AppDataContainer.getInstance().getPages();
         pages.remove(pages.get(pages.size() - 1));
@@ -95,6 +114,9 @@ public abstract class BaseScreen {
     }
 
 
+    /**
+     * Private method for setting up the page routes
+     */
     private void setupRoutes() {
         Text routeText = new Text();
         ArrayList<String> pages = AppDataContainer.getInstance().getPages();
@@ -111,6 +133,9 @@ public abstract class BaseScreen {
         routeBar.getChildren().add(routeText);
     }
 
+    /**
+     * Private method for setting up the right cover image
+     */
     private void setupBackgroundCoverImage() {
         ImageView rightBackgroundImage = new ImageView();
         rightBackgroundImage.setImage(getCoverImage());
@@ -122,6 +147,9 @@ public abstract class BaseScreen {
         pageContainer.getChildren().add(rightBackgroundImage);
     }
 
+    /**
+     * Private method for setting up the main toolbar
+     */
     private void setupTopBar() {
         FlowPane logoutPane = new FlowPane();
         Text title = new Text("Hoekbank");
@@ -156,6 +184,9 @@ public abstract class BaseScreen {
         topBar.getChildren().addAll(logoImageView, title, logoutPane);
     }
 
+    /**
+     * Private method to handle the application wide logout function
+     */
     private void logout() {
         GridPane loginPane = new GridPane();
         new LoginScreen(loginPane);

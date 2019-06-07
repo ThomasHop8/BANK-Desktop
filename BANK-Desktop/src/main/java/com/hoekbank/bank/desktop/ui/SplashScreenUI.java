@@ -5,7 +5,12 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 
-
+/**
+ * SplashScreenUI
+ * v2.1
+ *
+ * Created by Thomas Hopstaken on 04-01-2019
+ **/
 public abstract class SplashScreenUI {
 
     protected FlowPane container;

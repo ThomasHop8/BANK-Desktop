@@ -2,6 +2,12 @@ package com.hoekbank.bank.desktop.models;
 
 import com.google.gson.Gson;
 
+/**
+ * User
+ * v1.1
+ *
+ * Created by Thomas Hopstaken on 08-05-2019
+ **/
 public class User {
 
     private String fullname;

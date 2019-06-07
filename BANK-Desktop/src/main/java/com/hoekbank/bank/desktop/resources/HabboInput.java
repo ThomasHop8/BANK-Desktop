@@ -2,6 +2,12 @@ package com.hoekbank.bank.desktop.resources;
 
 import javafx.scene.control.TextField;
 
+/**
+ * HabboInput
+ * v1.0
+ *
+ * Created by Thomas Hopstaken on 27-05-2019
+ **/
 public class HabboInput extends TextField {
 
     public HabboInput() {
