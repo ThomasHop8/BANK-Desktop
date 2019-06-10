@@ -1,6 +1,7 @@
 package com.hoekbank.bank.desktop.screens;
 
 import com.google.gson.JsonObject;
+import com.hoekbank.bank.desktop.MainApp;
 import com.hoekbank.bank.desktop.api.API;
 import com.hoekbank.bank.desktop.api.APIService;
 import com.hoekbank.bank.desktop.helpers.AppDataContainer;
@@ -44,6 +45,9 @@ public class LoginScreen extends LoginScreenUI {
                 login();
             }
         });
+
+        loginGridPane.setMinWidth(MainApp.screenWidth);
+        loginGridPane.setMinHeight(MainApp.screenHeight);
 
         loginGridPane.setAlignment(Pos.CENTER);
         loginGridPane.setVgap(5);
