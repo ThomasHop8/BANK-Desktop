@@ -7,6 +7,8 @@ package com.hoekbank.bank.desktop.ui;
 
 import com.hoekbank.bank.desktop.BaseScreen;
 import com.hoekbank.bank.desktop.models.Rekening;
+import com.hoekbank.bank.desktop.resources.HabboButton;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -18,9 +20,10 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
 
+
 /**
  *
- * @author kevin
+ * @author kevin en rogier
  */
 public abstract class UserOverviewUI extends BaseScreen {
     public Button logout, addRekening, transactions, spaarrekening, betaalrekening, bankpas;
@@ -30,6 +33,7 @@ public abstract class UserOverviewUI extends BaseScreen {
     public TableView<Rekening> tableRekeningen;
     public Image logoImage, logoutImage;
     public ImageView logoImageView, logoutImageView;
+ 
     
     @Override
     protected void setupMainUI() {
@@ -45,7 +49,7 @@ public abstract class UserOverviewUI extends BaseScreen {
         addRekening = new Button("+");
         addRekening.setFont(Font.font(18));
         
-        transactions = new Button("Bekijk transacties");
+        transactions = new HabboButton("Bekijk transacties");
         transactions.setFont(Font.font(16));
         
         tableRekeningen = new TableView<>();
@@ -91,9 +95,19 @@ public abstract class UserOverviewUI extends BaseScreen {
         logoutImageView.setFitWidth(136);
         logout.setGraphic(logoutImageView);
         logout.setBackground(Background.EMPTY);
+        spaarrekening = new Button("Spaarrekening");
+        spaarrekening.setFont(Font.font ("Verdana", 20));
+        betaalrekening = new Button("Betaalrekening");
+        betaalrekening.setFont(Font.font ("Verdana", 20));
         
+        
+<<<<<<< HEAD
         
         //toegevoegd door Rogier
+=======
+		
+        // Dit is gemaakt door rogier
+>>>>>>> 5ab0919b0be4b395296f06ac55f5dfe56d7a1872
         spaarrekening= new Button("spaarrekening");
         betaalrekening = new Button("betaalrekening");
         bankpas = new Button("bankpas");

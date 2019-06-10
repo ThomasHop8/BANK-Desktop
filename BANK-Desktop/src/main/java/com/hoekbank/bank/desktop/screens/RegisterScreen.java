@@ -25,6 +25,7 @@ public class RegisterScreen extends RegisterScreenUI {
     private RegisterState registerState;
     public String userBSN;
 
+    //Hier word het scherm aangemaakt
     public RegisterScreen(Pane root) {
         setupLogin(RegisterState.EMPLOYEE, "Medewerker");
         registerState = AppDataContainer.getInstance().getRegisterState();
@@ -36,7 +37,12 @@ public class RegisterScreen extends RegisterScreenUI {
         
         if (registerState == RegisterState.COMPANY)
         	lblnaam.setText("Bedrijfsnaam");
+<<<<<<< HEAD
 // als je op de knop drukt word er gecontroleerd of je alles juist hebt ingevoerd en word je vervolgens doorverwezen naar de volgende pagina.
+=======
+
+        //Met deze knop worden de volgende items toegevoegd
+>>>>>>> 5ab0919b0be4b395296f06ac55f5dfe56d7a1872
         registerButton.setOnAction(event -> {
 
             if (txtnaam.getText().equals("")) {
@@ -144,8 +150,10 @@ public class RegisterScreen extends RegisterScreenUI {
 
         });
 
+        //Met deze knop gaat men terug naar het vorige scherm
         terugButton.setOnAction(event -> back());
 
+        //Hier worden de items aan het scherm toegevoegd
         g.add(lblnaam, 450, 200);
         g.add(txtnaam, 450, 201);
         g.add(lbltelefoon, 451, 200);
@@ -169,6 +177,7 @@ public class RegisterScreen extends RegisterScreenUI {
         root.getChildren().add(appContainer);
     }
 
+    //Hier word de inhoud omgezet naar het gebruikte design
     @Override
     protected Image getCoverImage() {
         return new Image("/images/background_covers/registration.png");

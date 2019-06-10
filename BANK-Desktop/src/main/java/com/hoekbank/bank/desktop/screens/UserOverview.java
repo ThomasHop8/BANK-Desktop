@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.hoekbank.bank.desktop.screens;
 
 import com.google.gson.JsonArray;
@@ -20,26 +15,17 @@ import com.sun.jersey.core.util.MultivaluedMapImpl;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Border;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
-import javafx.stage.Popup;
-
 import javax.ws.rs.core.MultivaluedMap;
-
 /**
  *
- * @author kevin
+ * @author kevin en rogier
  */
 public class UserOverview extends UserOverviewUI {
+<<<<<<< HEAD
     
     //Gridpane aangemaakt door Rogier, dit laat de opties om een spaarrekening,betaalrekening en bankpas aan te vragen.
     public GridPane Grid = new GridPane();
@@ -54,11 +40,31 @@ Grid.add(spaarrekening, 80, 95);
 Grid.add(betaalrekening, 81, 95);
 Grid.add(bankpas, 82, 95);
  
+=======
+
+    public GridPane grid = new GridPane();
+
+    public UserOverview(Pane root) {
+        setupLogin(RegisterState.USER, "Gebruiker");
+
+        tableRekeningen.setItems(getRekening());
+        grid.setPadding(new Insets(10, 10, 10, 10));
+        grid.setPrefSize(300, 300);
+        grid.setVgap(5);
+        grid.setHgap(5);
+        spaarrekening.setText("Spaarrekening");
+        grid.add(spaarrekening, 80, 95);
+        grid.add(betaalrekening, 81, 95);
+        grid.add(bankpas, 82, 95);
+
+>>>>>>> 5ab0919b0be4b395296f06ac55f5dfe56d7a1872
         tableRekeningen.columnResizePolicyProperty();
-        tableRekeningen.widthProperty().addListener((source, oldWidth, newWidth)->{
+
+        tableRekeningen.widthProperty().addListener((source, oldWidth, newWidth) -> {
             TableHeaderRow header = (TableHeaderRow) tableRekeningen.lookup("TableHeaderRow");
-            header.reorderingProperty().addListener((observable, oldValue, newValue)-> header.setReordering(false));
+            header.reorderingProperty().addListener((observable, oldValue, newValue) -> header.setReordering(false));
         });
+<<<<<<< HEAD
  
          addRekening.setOnAction(e ->{
            
@@ -77,6 +83,15 @@ Grid.add(bankpas, 82, 95);
         
         
         
+=======
+
+        addRekening.setOnAction(e -> {
+
+            root.getChildren().add(grid);
+
+        });
+
+>>>>>>> 5ab0919b0be4b395296f06ac55f5dfe56d7a1872
         transactions.setOnAction(e -> {
             String selectedRekNr = tableRekeningen.getSelectionModel().getSelectedItem().getRekeningnummer();
             selectedRekNr = selectedRekNr.replace(".", "");
@@ -85,8 +100,8 @@ Grid.add(bankpas, 82, 95);
             new TransactionScreen(transPane, selectedRekNr);
             ScenesController.setStage(transPane);
         });
-        
-        userOverviewPane.getChildren().addAll(logout, addRekening, transactions, titleLabel, rekeningLabel, addRekeningLabel, tableRekeningen, logoImageView, logoutImageView);
+
+        userOverviewPane.getChildren().addAll(addRekening, transactions, titleLabel, rekeningLabel, addRekeningLabel, tableRekeningen, logoImageView);
 
         pageContainer.getChildren().add(userOverviewPane);
         root.getChildren().add(appContainer);
@@ -101,17 +116,17 @@ Grid.add(bankpas, 82, 95);
     protected String getPageTitle() {
         return "REKENINGEN";
     }
-    
-    private ObservableList<Rekening>getRekening() {
+
+    private ObservableList<Rekening> getRekening() {
         ObservableList<Rekening> rekeningen = FXCollections.observableArrayList();
 
         for (JsonElement rekening : getAccounts()) {
             JsonObject object = rekening.getAsJsonObject();
             String rekHouder;
 
-            if(!object.get("Volledige Naam").isJsonNull()) {
+            if (!object.get("Volledige Naam").isJsonNull()) {
                 rekHouder = object.get("Volledige Naam").getAsString();
-            } else if(!object.get("Bedrijfsnaam").isJsonNull()) {
+            } else if (!object.get("Bedrijfsnaam").isJsonNull()) {
                 rekHouder = object.get("Bedrijfsnaam").getAsString();
             } else {
                 continue;
@@ -136,6 +151,3 @@ Grid.add(bankpas, 82, 95);
         ScenesController.setStage(loginPane);
     }
 }
-
-        
-

@@ -1,6 +1,14 @@
+/*
+ * 
+ * Auteur: Chris Gerlach & Rogier Rijsdijk
+ */
+
 package com.hoekbank.bank.desktop.ui;
 
 import com.hoekbank.bank.desktop.BaseScreen;
+import com.hoekbank.bank.desktop.resources.HabboBackButton;
+import com.hoekbank.bank.desktop.resources.HabboButton;
+import com.hoekbank.bank.desktop.resources.HabboInput;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -8,7 +16,8 @@ import javafx.scene.layout.GridPane;
 
 public abstract class RegisterScreenUI extends BaseScreen {
 
-    public GridPane registerGridPane;
+    //In deze Class worden de UI-eenheden van RegisterScreen aangemaakt
+	public GridPane registerGridPane;
 
     public Button registerButton, terugButton;
     public TextField txtnaam,txtstraatnaam,txtwoonplaats, txttelefoon,txthuisnummer, txtemail,txtpostcode;
@@ -18,8 +27,8 @@ public abstract class RegisterScreenUI extends BaseScreen {
     protected void setupMainUI() {
         registerGridPane = new GridPane();
 
-        registerButton = new Button("Registreren");
-        txtnaam = new TextField ("");
+        registerButton = new HabboButton("Registreren");
+        txtnaam = new HabboInput("");
         txtstraatnaam = new TextField ("");
         txtwoonplaats = new TextField ("");
         txttelefoon = new TextField ("");
@@ -33,7 +42,7 @@ public abstract class RegisterScreenUI extends BaseScreen {
         lblhuisnummer = new Label ("Huisnummer");
         lblemail = new Label ("Email adres");
         lblpostcode = new Label ("Postcode");
-        terugButton = new Button ("Terug");
+        terugButton = new HabboBackButton("Terug");
       
     }
 }

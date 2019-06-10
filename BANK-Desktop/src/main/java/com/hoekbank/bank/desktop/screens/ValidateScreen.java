@@ -28,7 +28,10 @@ import java.util.Optional;
 
 
 /**
+ * ValidateScreen UI
+ * v1.0
  * @author Chahine
+ * Last edit 15 mei 2019
  */
 
 public class ValidateScreen extends ValidateScreenUI {
@@ -51,7 +54,7 @@ public class ValidateScreen extends ValidateScreenUI {
         // gridpane settings
         gridPaneLinks.setMinSize(640, 691);
 //        gridPaneLinks.setMaxSize(640,700);
-        gridPaneLinks.setAlignment(Pos.CENTER);
+        gridPaneLinks.setAlignment(Pos.TOP_CENTER);
         gridPaneLinks.setVgap(10);
         gridPaneLinks.setHgap(10);
         gridPaneLinks.setPadding(new Insets(10));
@@ -108,7 +111,7 @@ public class ValidateScreen extends ValidateScreenUI {
         // gridpane settings
         gridRechts.setMinSize(640, 691);
         gridRechts.setMaxSize(640, 691);
-        gridRechts.setAlignment(Pos.BOTTOM_RIGHT);
+        gridRechts.setAlignment(Pos.CENTER_RIGHT);
         gridRechts.setVgap(10);
         gridRechts.setHgap(10);
         gridRechts.setPadding(new Insets(10));

@@ -2,12 +2,18 @@ package com.hoekbank.bank.desktop.ui;
 
 import com.hoekbank.bank.desktop.BaseScreen;
 import com.hoekbank.bank.desktop.models.Transactie;
+import com.hoekbank.bank.desktop.resources.HabboBackButton;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.BorderPane;
 
-
+/**
+ * TransactionScreenUI
+ * V1.0
+ * @author Chahine
+ * Last edit 27 mei 2019
+ */
 public abstract class TransactionScreenUI extends BaseScreen {
 
     public BorderPane transactionBorderPane;
@@ -23,7 +29,7 @@ public abstract class TransactionScreenUI extends BaseScreen {
         transactionBorderPane = new BorderPane();
 
         // Knoppen
-        btnTerug = new Button("< Terug");
+        btnTerug = new HabboBackButton("< Terug");
         // Labels
         lbTitel = new Label("Transacties");
         lbSaldo = new Label("Saldo");

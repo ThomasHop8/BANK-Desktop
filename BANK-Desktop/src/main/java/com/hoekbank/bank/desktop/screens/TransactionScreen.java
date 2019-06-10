@@ -31,7 +31,10 @@ import javafx.scene.text.FontWeight;
 import javax.ws.rs.core.MultivaluedMap;
 
 /**
+ * TransactionScreen
+ * V1.0
  * @author Chahine
+ * Last edit 27 mei 2019
  */
 
 public class TransactionScreen extends TransactionScreenUI {

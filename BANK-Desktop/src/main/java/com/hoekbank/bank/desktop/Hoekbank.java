@@ -1,5 +1,11 @@
 package com.hoekbank.bank.desktop;
 
+/**
+ * Hoekbank
+ * v1.3
+ *
+ * Created by Thomas Hopstaken on 08-05-2019
+ **/
 public abstract class Hoekbank {
 
     public static String BASE_URL = "https://hoekbank.tk/api/v1";
