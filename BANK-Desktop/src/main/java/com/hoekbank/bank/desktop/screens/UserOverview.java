@@ -25,7 +25,7 @@ import javax.ws.rs.core.MultivaluedMap;
  * @author kevin en rogier
  */
 public class UserOverview extends UserOverviewUI {
-<<<<<<< HEAD
+
     
     //Gridpane aangemaakt door Rogier, dit laat de opties om een spaarrekening,betaalrekening en bankpas aan te vragen.
     public GridPane Grid = new GridPane();
@@ -39,32 +39,20 @@ spaarrekening.setText("Spaarrekening");
 Grid.add(spaarrekening, 80, 95);
 Grid.add(betaalrekening, 81, 95);
 Grid.add(bankpas, 82, 95);
- 
-=======
 
-    public GridPane grid = new GridPane();
-
-    public UserOverview(Pane root) {
+   
+    
         setupLogin(RegisterState.USER, "Gebruiker");
 
-        tableRekeningen.setItems(getRekening());
-        grid.setPadding(new Insets(10, 10, 10, 10));
-        grid.setPrefSize(300, 300);
-        grid.setVgap(5);
-        grid.setHgap(5);
-        spaarrekening.setText("Spaarrekening");
-        grid.add(spaarrekening, 80, 95);
-        grid.add(betaalrekening, 81, 95);
-        grid.add(bankpas, 82, 95);
+     
 
->>>>>>> 5ab0919b0be4b395296f06ac55f5dfe56d7a1872
         tableRekeningen.columnResizePolicyProperty();
 
         tableRekeningen.widthProperty().addListener((source, oldWidth, newWidth) -> {
             TableHeaderRow header = (TableHeaderRow) tableRekeningen.lookup("TableHeaderRow");
             header.reorderingProperty().addListener((observable, oldValue, newValue) -> header.setReordering(false));
         });
-<<<<<<< HEAD
+
  
          addRekening.setOnAction(e ->{
            
@@ -83,15 +71,9 @@ Grid.add(bankpas, 82, 95);
         
         
         
-=======
 
-        addRekening.setOnAction(e -> {
+      
 
-            root.getChildren().add(grid);
-
-        });
-
->>>>>>> 5ab0919b0be4b395296f06ac55f5dfe56d7a1872
         transactions.setOnAction(e -> {
             String selectedRekNr = tableRekeningen.getSelectionModel().getSelectedItem().getRekeningnummer();
             selectedRekNr = selectedRekNr.replace(".", "");

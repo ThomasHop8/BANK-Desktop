@@ -101,13 +101,13 @@ public abstract class UserOverviewUI extends BaseScreen {
         betaalrekening.setFont(Font.font ("Verdana", 20));
         
         
-<<<<<<< HEAD
+
         
         //toegevoegd door Rogier
-=======
+
 		
         // Dit is gemaakt door rogier
->>>>>>> 5ab0919b0be4b395296f06ac55f5dfe56d7a1872
+
         spaarrekening= new Button("spaarrekening");
         betaalrekening = new Button("betaalrekening");
         bankpas = new Button("bankpas");

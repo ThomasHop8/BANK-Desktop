@@ -37,12 +37,11 @@ public class RegisterScreen extends RegisterScreenUI {
         
         if (registerState == RegisterState.COMPANY)
         	lblnaam.setText("Bedrijfsnaam");
-<<<<<<< HEAD
+
 // als je op de knop drukt word er gecontroleerd of je alles juist hebt ingevoerd en word je vervolgens doorverwezen naar de volgende pagina.
-=======
 
         //Met deze knop worden de volgende items toegevoegd
->>>>>>> 5ab0919b0be4b395296f06ac55f5dfe56d7a1872
+
         registerButton.setOnAction(event -> {
 
             if (txtnaam.getText().equals("")) {
