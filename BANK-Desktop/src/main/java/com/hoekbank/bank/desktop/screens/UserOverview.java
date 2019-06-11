@@ -45,7 +45,7 @@ Grid.add(bankpas, 82, 95);
         setupLogin(RegisterState.USER, "Gebruiker");
 
      
-
+        //Gegevens toevoegen aan tabel Rekeningen (Kevin)
         tableRekeningen.columnResizePolicyProperty();
 
         tableRekeningen.widthProperty().addListener((source, oldWidth, newWidth) -> {
@@ -54,26 +54,14 @@ Grid.add(bankpas, 82, 95);
         });
 
  
-         addRekening.setOnAction(e ->{
+        addRekening.setOnAction(e ->{
            
             root.getChildren().add(Grid);
              
          });
         
         
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-
-      
-
+        //Action handler aan knop transacties om de transacties van een rekening te zien (Kevin)
         transactions.setOnAction(e -> {
             String selectedRekNr = tableRekeningen.getSelectionModel().getSelectedItem().getRekeningnummer();
             selectedRekNr = selectedRekNr.replace(".", "");
@@ -126,7 +114,7 @@ Grid.add(bankpas, 82, 95);
 
         return API.getInstance().post(APIService.ACCOUNT_LIST, formData).getAsJsonArray();
     }
-
+    //Eventhandler knop Uitloggen (Kevin)
     private void logout() {
         GridPane loginPane = new GridPane();
         new LoginScreen(loginPane);

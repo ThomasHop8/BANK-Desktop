@@ -19,23 +19,29 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 
 import javax.ws.rs.core.MultivaluedMap;
-
+/**
+ *
+ * @author Kevin
+ */
 public class LoginScreen extends LoginScreenUI {
 
     public LoginScreen(Pane root) {
         setupMainUI();
-
+        //Eventhandler knop inloggen met controle of alles is ingevuld
         loginButton.setOnAction(e->{
+            //Controle of beide velden zijn ingevuld
             if (emailField.getText().isEmpty() && passwordField.getText().isEmpty()){
                 showError("Geen gegevens ingevuld",
                         "Alle velden zijn leeg",
                         "Voer een e-mailadres en wachtwoord in");
             }
+            //Controle of email is ingevuld
             else if(emailField.getText().isEmpty()){
                 showError("Geen e-mailadres ingevuld",
                         "Er is geen e-mailadres ingevuld",
                         "Voer een geldig e-mailadres in");
             }
+            //Controle of wachtwoord is ingevuld
             else if(passwordField.getText().isEmpty()){
                 showError("Geen wachtwoord ingevuld",
                         "Er is geen wachtwoord ingevuld",
@@ -60,7 +66,8 @@ public class LoginScreen extends LoginScreenUI {
         loginGridPane.add(passwordLabel, 0, 4);
         loginGridPane.add(passwordField, 0, 5);
         loginGridPane.add(loginButton, 0, 6);
-
+        
+        //Eventhandler knop inloggen met enter toets
         loginGridPane.addEventHandler(KeyEvent.KEY_PRESSED, ev -> {
             if (ev.getCode() == KeyCode.ENTER) {
                 loginButton.fire();
@@ -70,7 +77,7 @@ public class LoginScreen extends LoginScreenUI {
 
         root.getChildren().add(loginGridPane);
     }
-
+    //Gegevens uit database opgalen om in te loggen
     private void login() {
         MultivaluedMap<String, String> formData = new MultivaluedMapImpl();
         formData.add("email", emailField.getText());
@@ -81,7 +88,7 @@ public class LoginScreen extends LoginScreenUI {
         if(apiResponse.get("success") != null) {
             AppDataContainer.getInstance().setUserToken(apiResponse.get("Token").getAsString());
             AppDataContainer.getInstance().setUserID(apiResponse.get("UserID").getAsString());
-
+            //Als email @hoekbank bevat, inloggen als medewerker
             if(apiResponse.get("Email").getAsString().contains("@hoekbank.tk")) {
                 Pane employeePane = new Pane();
                 new EmployeeDashboard(employeePane);
@@ -104,7 +111,7 @@ public class LoginScreen extends LoginScreenUI {
     private void showDashboard() {
 
     }
-
+    //Error message
     private void showError(String title, String header, String content) {
         Alert errorAlert = new Alert(AlertType.ERROR);
         errorAlert.setTitle(title);
